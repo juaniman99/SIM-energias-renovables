@@ -15,12 +15,16 @@ import java.awt.Font;
 public class Climawindow {
 
 	JFrame frmClima;
-	public JLabel lbliconoClimatologico;
+	public static JLabel lbliconoClimatologico;
 	public JPanel panel;
 	public JLabel lblVientokmh;
 	public static JLabel lblFecha;
 	public JLabel lblSol;
 	public JLabel lblLluvia;
+	public JLabel label;
+	public JLabel lblTemperatura;
+	public static JLabel lblc;
+	public static JLabel lblkmh;
 
 	/**
 	 * Launch the application.
@@ -63,11 +67,11 @@ public class Climawindow {
 		lbliconoClimatologico.setIcon(imageIcon);
 		
 		panel = new JPanel();
-		panel.setBounds(180, 21, 227, 150);
+		panel.setBounds(180, 11, 227, 150);
 		frmClima.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		lblVientokmh = new JLabel("Viento (km/h):");
+		lblVientokmh = new JLabel("Viento:");
 		lblVientokmh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVientokmh.setBounds(10, 11, 148, 34);
 		panel.add(lblVientokmh);
@@ -82,9 +86,33 @@ public class Climawindow {
 		lblLluvia.setBounds(10, 84, 148, 34);
 		panel.add(lblLluvia);
 		
+		label = new JLabel("0%");
+		label.setHorizontalAlignment(SwingConstants.RIGHT);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		label.setBounds(168, 48, 49, 22);
+		panel.add(label);
+		
+		lblTemperatura = new JLabel("Temperatura:");
+		lblTemperatura.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTemperatura.setBounds(10, 116, 148, 34);
+		panel.add(lblTemperatura);
+		
+		lblc = new JLabel("0.00\u00BAc");
+		lblc.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblc.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblc.setBounds(144, 123, 73, 22);
+		panel.add(lblc);
+		
+		lblkmh = new JLabel("0km/h");
+		lblkmh.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblkmh.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblkmh.setBounds(144, 15, 73, 22);
+		panel.add(lblkmh);
+		
 		lblFecha = new JLabel("fecha");
+		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblFecha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFecha.setBounds(122, 181, 150, 14);
+		lblFecha.setBounds(104, 172, 150, 23);
 		frmClima.getContentPane().add(lblFecha);
 	}
 }

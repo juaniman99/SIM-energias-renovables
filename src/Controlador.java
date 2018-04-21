@@ -13,7 +13,7 @@ public class Controlador {
 	static Mapwindow mapw;
 	static Climawindow climaw;
 	
-	public static void IniciarVentanas(){
+	public static void Iniciar(){
 		loginw = new Loginwindow();
 		mapw = new Mapwindow();
 		climaw = new Climawindow();

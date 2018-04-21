@@ -39,7 +39,7 @@ public class Maincontrol {
 	 */
 	public Maincontrol() {
 		initialize();
-		Controlador.IniciarVentanas();
+		Controlador.Iniciar();
 	}
 
 	/**

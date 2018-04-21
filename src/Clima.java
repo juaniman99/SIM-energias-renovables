@@ -1,6 +1,11 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 //Project By Juan Torres Gómez
 
 //	Esta clase la usará Tiempo.java . Almacena los datos de los distintos climas posibles.
+//	PD: Cada clima debería detener la volatilidad de cada tipo (el rango de variacion de la temperatura media por ejemplo). Para no complicarme demasiado, este dato será fijo en Tiempo.CambiarClima();
 public class Clima {
 	private String nombre;
 	private String img;
@@ -18,8 +23,8 @@ public class Clima {
 		this.velocidadVientoMedia = velocidadVientoMedia;
 	}
 	
-	public String getImg() {
-		return img;
+	public ImageIcon getImg() {
+		return new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(129, 129, Image.SCALE_DEFAULT));
 	}
 	
 	public float getTempMedia() {
