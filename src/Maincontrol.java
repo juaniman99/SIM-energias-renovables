@@ -11,11 +11,16 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JSlider;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Maincontrol {
 
 	private JFrame frmPanelDeControl;
-	private JTable table;
+	public static JTable table;
+	public static DefaultTableModel model = new DefaultTableModel();
+	public JButton btnNewButton;
+	public JButton btnDemoler;
 	
 
 	/**
@@ -54,18 +59,14 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 12, 264, 408);
+		scrollPane.setBounds(12, 12, 264, 367);
 		frmPanelDeControl.getContentPane().add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Nombre", "Tipo", "Producción"
-			}
-		));
+		model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Produccion");
+        model.addColumn("Produccion");	//Porcentaje potencia.
+		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
 		JPanel panel = new JPanel();
@@ -134,5 +135,23 @@ public class Maincontrol {
 		lblProducci.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblProducci.setBounds(0, 114, 195, 15);
 		panel_2.add(lblProducci);
+		
+		btnNewButton = new JButton("Construir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Controlador.AnadirPlanta();
+			}
+		});
+		btnNewButton.setBounds(12, 390, 128, 30);
+		frmPanelDeControl.getContentPane().add(btnNewButton);
+		
+		btnDemoler = new JButton("Demoler");
+		btnDemoler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador.DemolerPlanta();
+			}
+		});
+		btnDemoler.setBounds(148, 390, 128, 30);
+		frmPanelDeControl.getContentPane().add(btnDemoler);
 	}
 }
