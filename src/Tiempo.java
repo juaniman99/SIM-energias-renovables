@@ -4,6 +4,8 @@
  * 	También controla los elementos que se mostrarán en la ventana de CLIMA
  */
 public class Tiempo {
+	private Clima[] climas;
+	private Clima climaActual;
 	private int minuto;
 	private int hora;
 	private int dia;
@@ -12,6 +14,7 @@ public class Tiempo {
 	
 	private int viento;	//en km/h
 	private int sol;
+	private float temperatura;
 	
 	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiará. La variable se reestablecerá a un valor aleatorio.
 	
@@ -21,6 +24,13 @@ public class Tiempo {
 		this.dia = 1;
 		this.mes = 1;
 		this.anyo = 2018;
+		climas = new Clima[6];
+		climas[0] = new Clima("soleado", "imagenes/clima/dia-soleado.png", 0, 26, 25);
+		climas[1] = new Clima("nublado", "imagenes/clima/nublado.png", 0, 12, 30);
+		climas[2] = new Clima("nevando", "imagenes/clima/nevando.png", 1, 0, 25);
+		climas[3] = new Clima("llovizna", "imagenes/clima/llovizna.png", 1, 12, 10);
+		climas[4] = new Clima("lluvia", "imagenes/clima/dia-lluvioso.png", 2, 6, 50);
+		climas[5] = new Clima("tormenta", "imagenes/clima/tormenta.png", 3, 13, 60);
 	}
 	
 	
@@ -44,6 +54,15 @@ public class Tiempo {
 			anyo ++;
 		}
 		Climawindow.lblFecha.setText(dateToString());
+		CheckTicks();
+	}
+	
+	private void CheckTicks() {
+		System.out.println(ticksToNextEvent);
+		ticksToNextEvent--;
+		if(ticksToNextEvent <= 0) {
+			ticksToNextEvent = (int)(Math.random()*160-60)+60;
+		}
 	}
 
 	public String dateToString() {
