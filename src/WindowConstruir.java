@@ -76,7 +76,7 @@ public class WindowConstruir {
 		btnNewButton = new JButton("Construir!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.ConstruirPlanta(String.valueOf(comboBox.getSelectedItem()), textField.getText(), 10, Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_2.getText()), String.valueOf(comboBox_1.getSelectedItem()));	//el 10 hay que modificarlo
+				Controlador.ConstruirPlanta(String.valueOf(comboBox.getSelectedItem()), textField.getText(), Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_2.getText()), String.valueOf(comboBox_1.getSelectedItem()));	//el 10 hay que modificarlo
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 17));

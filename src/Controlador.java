@@ -41,7 +41,8 @@ public class Controlador {
 		//Inicia el asistente para seleccionar el tipo de planta y su posición.
 		contrucw.frmNuevaConstruccion.setVisible(true);
 	}
-	public static void ConstruirPlanta(String tipo, String nombre, int id, int posX, int posY, String produccionMaxima) {
+	
+	public static void ConstruirPlanta(String tipo, String nombre, int posX, int posY, String produccionMaxima) {
 		int prodMax = 0;
 		if(produccionMaxima.equals("XS"))
 			prodMax = 10;
@@ -54,15 +55,18 @@ public class Controlador {
 		else if(produccionMaxima.equals("XL"))
 			prodMax = 500;
 				
-		modelo.addCentral(tipo, nombre, id, posX, posY, prodMax);
-		Maincontrol.model.addRow(new Object[] {nombre, "222", "333", "50%"});
+		modelo.addCentral(tipo, nombre, posX, posY, prodMax);
 	}
 	
 	public static void DemolerPlanta() {
-		Maincontrol.model.removeRow(Maincontrol.table.getSelectedRow());
+		modelo.removeCentral(1);
 	}
 	
-	static Timer timer = new Timer (100, new ActionListener () {
+	public static void SelectRow(int i) {
+		Maincontrol.table.setRowSelectionInterval(i, i);
+	}
+	
+	static Timer timer = new Timer (100, new ActionListener () {	//El corazón de todo el programa. El que le da vida.
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO ESTA ES LA FUNCIÓN QUE SE EJECUTA

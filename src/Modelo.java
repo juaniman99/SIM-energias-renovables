@@ -8,8 +8,16 @@ public class Modelo {
 	Modelo(){
 		centrales = new ArrayList<>();
 	}
-	public void addCentral(String tipo, String nombre, int id, int posX, int posY, float produccionMaxima) {
-		centrales.add(new Central(id, nombre, posX, posY, produccionMaxima));
+	public void addCentral(String tipo, String nombre, int posX, int posY, float produccionMaxima) {
+		if(tipo.equals("Eolica"))
+			centrales.add(new CentralEolica(centrales.size(), nombre, posX, posY, produccionMaxima));
+		else if(tipo.equals("Solar"))
+			centrales.add(new CentralSolar(centrales.size(), nombre, posX, posY, produccionMaxima));
+
+		Maincontrol.model.addRow(new Object[] {nombre, tipo, "...", "25%"});			
+	}
+	public void removeCentral(int idToRemove) {
+		Maincontrol.model.removeRow(Maincontrol.table.getSelectedRow());
 	}
 	
 	public boolean checkCredentials(String user, String pass) {

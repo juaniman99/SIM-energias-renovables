@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 // Project by Juan Torres Gomez
 
 public class Central {
+	private ImageIcon imgStatusOn;
+	private ImageIcon imgStatusOff;
 	private int id;
 	private String nombre;
 	private int posX;
@@ -17,27 +19,23 @@ public class Central {
 	private int trottle;
 	private float produccionMaxima;
 	
-	Central(int id, String nombre, int posX, int posY, float produccionMaxima) {
+	Central(int id, String nombre, int posX, int posY, float produccionMaxima, ImageIcon imgStatusOn, ImageIcon imgStatusOff) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.posX = posX;
 		this.posY = posY;
 		this.produccionMaxima = produccionMaxima;
-		
+		this.imgStatusOff = imgStatusOff;
+		this.imgStatusOn = imgStatusOn;
+		trottle = 25;
 		anadir();
 	}
 	public void anadir() {
-		ImageIcon panelOn;
-		if((int)(Math.random()*100) > 50)
-			panelOn = new ImageIcon(new ImageIcon("images/panel_on.gif").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-		else
-			panelOn = new ImageIcon(new ImageIcon("images/molino_on.gif").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-		
 		JLabel lblpanel8 = new JLabel();
 		lblpanel8.setBounds(posX, posY, 70, 70);
 		Mapwindow.panel_1.add(lblpanel8);
-		lblpanel8.setIcon(panelOn);
+		lblpanel8.setIcon(imgStatusOn);
 		lblpanel8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -46,6 +44,10 @@ public class Central {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblpanel8.setBorder(null);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controlador.SelectRow(id);
 			}
 		});
 	}

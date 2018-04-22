@@ -65,13 +65,13 @@ public class Maincontrol {
 		model.addColumn("Nombre");
         model.addColumn("Tipo");
         model.addColumn("Produccion");
-        model.addColumn("Produccion");	//Porcentaje potencia.
+        model.addColumn("potencia");	//Porcentaje potencia.
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setToolTipText("Información");
+		panel.setToolTipText("Informacion");
 		panel.setBounds(288, 12, 216, 109);
 		frmPanelDeControl.getContentPane().add(panel);
 		panel.setLayout(null);
