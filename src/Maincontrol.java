@@ -62,6 +62,7 @@ public class Maincontrol {
 		scrollPane.setBounds(12, 12, 264, 367);
 		frmPanelDeControl.getContentPane().add(scrollPane);
 		
+		model.addColumn("Id");
 		model.addColumn("Nombre");
         model.addColumn("Tipo");
         model.addColumn("Produccion");

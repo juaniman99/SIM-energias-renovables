@@ -18,6 +18,7 @@ public class Central {
 	private int posY;
 	private int trottle;
 	private float produccionMaxima;
+	JLabel lblpanel8;
 	
 	Central(int id, String nombre, int posX, int posY, float produccionMaxima, ImageIcon imgStatusOn, ImageIcon imgStatusOff) {
 		super();
@@ -32,7 +33,7 @@ public class Central {
 		anadir();
 	}
 	public void anadir() {
-		JLabel lblpanel8 = new JLabel();
+		lblpanel8 = new JLabel();
 		lblpanel8.setBounds(posX, posY, 70, 70);
 		Mapwindow.panel_1.add(lblpanel8);
 		lblpanel8.setIcon(imgStatusOn);
@@ -47,11 +48,16 @@ public class Central {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.SelectRow(id);
+				Controlador.SelectRow(Modelo.SearchRownById(id));
 			}
 		});
 	}
-	
+	public void Remover() {
+		lblpanel8.setVisible(false);	//Por mejorar
+	}
+	public int getId() {
+		return id;
+	}
 	public int getTrollet() {
 		return trottle;
 	}

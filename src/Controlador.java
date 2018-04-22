@@ -55,11 +55,16 @@ public class Controlador {
 		else if(produccionMaxima.equals("XL"))
 			prodMax = 500;
 				
-		modelo.addCentral(tipo, nombre, posX, posY, prodMax);
+		int ids = (int)(Math.random()*999-100)+100;
+		while(modelo.CheckIfIdExist(ids)) {	//Comprueba que la id sea unica.
+			ids = (int)(Math.random()*999-100)+100;
+		}
+		
+		modelo.addCentral(tipo, nombre, ids, posX, posY, prodMax);
 	}
 	
 	public static void DemolerPlanta() {
-		modelo.removeCentral(1);
+		modelo.removeCentral((int) Maincontrol.table.getValueAt(Maincontrol.table.getSelectedRow(), 0));
 	}
 	
 	public static void SelectRow(int i) {
