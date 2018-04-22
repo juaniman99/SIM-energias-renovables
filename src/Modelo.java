@@ -7,6 +7,13 @@ public class Modelo {
 	
 	Modelo(){
 		centrales = new ArrayList<>();
+		
+		//Crea 3 centrales iniciales
+		addCentral("Eolica", "11", 100, (int)(Math.random()*400), (int)(Math.random()*200), 200);
+		addCentral("Eolica", "22", 101, (int)(Math.random()*400), (int)(Math.random()*200), 200);
+		addCentral("Eolica", "33", 102, (int)(Math.random()*400), (int)(Math.random()*200), 200);
+		addCentral("Eolica", "22", 103, (int)(Math.random()*400), (int)(Math.random()*200), 50);
+		addCentral("Solar", "33", 104, (int)(Math.random()*400), (int)(Math.random()*200), 100);
 	}
 	public void addCentral(String tipo, String nombre, int id, int posX, int posY, float produccionMaxima) {
 		if(tipo.equals("Eolica"))
@@ -37,6 +44,16 @@ public class Modelo {
 				return true;
 		}
 		return false;
+	}
+	
+	public Central getCentral(int id) {
+		for(int i = 0; i < centrales.size(); i++) {
+			System.out.println(centrales.get(i).getId() + " - " + id);
+			if(centrales.get(i).getId() == id)
+				return centrales.get(i);
+		}
+		System.out.println("Central no encontrada");
+		return null;
 	}
 	
 	public static int SearchRownById(int idToSearch) {	//Este metodo buscará en la tabla la central con dicha id y retornará su posicion en esta.

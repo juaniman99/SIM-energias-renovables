@@ -13,15 +13,27 @@ import javax.swing.JSlider;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Maincontrol {
 
-	private JFrame frmPanelDeControl;
+	public static JFrame frmPanelDeControl;
 	public static JTable table;
 	public static DefaultTableModel model = new DefaultTableModel();
+	public static JSlider slider;
+	public static JButton btnDetener;
+	public static JButton btnArrancar;
 	public JButton btnNewButton;
 	public JButton btnDemoler;
-	
+	public static JLabel lblNombre;
+	public static JLabel lblLocalidad;
+	public static JLabel lblCapacidad;
+	public static JLabel lblEstado;
 
 	/**
 	 * Launch the application.
@@ -38,7 +50,7 @@ public class Maincontrol {
 			}
 		});
 	}
-
+ 
 	/**
 	 * Create the application.
 	 */
@@ -68,6 +80,18 @@ public class Maincontrol {
         model.addColumn("Produccion");
         model.addColumn("potencia");	//Porcentaje potencia.
 		table = new JTable(model);
+		table.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Controlador.TableSelectionChangued(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+			}
+		});
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Controlador.TableSelectionChangued(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		JPanel panel = new JPanel();
@@ -77,28 +101,38 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNombre = new JLabel("Nombre: ");
+		 lblNombre = new JLabel("Nombre: ");
 		lblNombre.setBounds(12, 23, 192, 15);
 		panel.add(lblNombre);
 		
-		JLabel lblCapacidad = new JLabel("Capacidad:");
+		lblCapacidad = new JLabel("Produccion MAX:");
 		lblCapacidad.setBounds(12, 62, 192, 15);
 		panel.add(lblCapacidad);
 		
-		JLabel lblLocalidad = new JLabel("Localidad:");
+		lblLocalidad = new JLabel("Localizacion:");
 		lblLocalidad.setBounds(12, 41, 192, 15);
 		panel.add(lblLocalidad);
 		
-		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado = new JLabel("Estado:");
 		lblEstado.setBounds(12, 82, 192, 15);
 		panel.add(lblEstado);
 		
-		JButton btnArrancar = new JButton("ARRANCAR");
-		btnArrancar.setBounds(305, 174, 120, 60);
+		btnArrancar = new JButton("ARRANCAR");
+		btnArrancar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador.apagarOEncenderCentral(true);
+			}
+		});
+		btnArrancar.setBounds(300, 174, 95, 60);
 		frmPanelDeControl.getContentPane().add(btnArrancar);
 		
-		JButton btnDetener = new JButton("DETENER");
-		btnDetener.setBounds(437, 174, 120, 60);
+		btnDetener = new JButton("DETENER");
+		btnDetener.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Controlador.apagarOEncenderCentral(false);
+			}
+		});
+		btnDetener.setBounds(405, 174, 95, 60);
 		frmPanelDeControl.getContentPane().add(btnDetener);
 		
 		JPanel panel_1 = new JPanel();
@@ -106,9 +140,6 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JSlider slider = new JSlider();
-		slider.setBounds(25, 12, 186, 16);
-		panel_1.add(slider);
 		
 		JLabel label = new JLabel("0%");
 		label.setBounds(0, 13, 27, 15);
@@ -121,6 +152,16 @@ public class Maincontrol {
 		JLabel label_2 = new JLabel("50%");
 		label_2.setBounds(97, 33, 75, 15);
 		panel_1.add(label_2);
+		
+		slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				Controlador.SetCentralTrotle(slider.getValue());
+				label_2.setText(slider.getValue() + "%");
+			}
+		});
+		slider.setBounds(25, 12, 186, 16);
+		panel_1.add(slider);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(574, 252, 207, 168);

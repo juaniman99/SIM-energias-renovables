@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import sun.applet.Main;
+
 public class Controlador {
 	private static Modelo modelo;
 	private static Tiempo tiempo;
@@ -13,6 +15,7 @@ public class Controlador {
 	static Mapwindow mapw;
 	static Climawindow climaw;
 	static WindowConstruir contrucw;
+	private static Central centralSeleccionada;
 	
 	public static void Iniciar(){
 		loginw = new Loginwindow();
@@ -67,6 +70,37 @@ public class Controlador {
 		modelo.removeCentral((int) Maincontrol.table.getValueAt(Maincontrol.table.getSelectedRow(), 0));
 	}
 	
+	public static void TableSelectionChangued(int v) {	//Este metodo será llamado desde la tabla de MainCOntrol cada vez que se seleccione una fila.
+		centralSeleccionada = modelo.getCentral(v);
+		ReloadData();
+	}
+	private static void ReloadData() {
+		Maincontrol.slider.setValue(centralSeleccionada.getTrollet());
+		Maincontrol.lblNombre.setText("Nombre: " + centralSeleccionada.getNombre());
+		Maincontrol.lblLocalidad.setText("Localizacion:" + "x: " + centralSeleccionada.getPosX() + ", y: " + centralSeleccionada.getPosY());
+		Maincontrol.lblCapacidad.setText("Produccion MAX: " + centralSeleccionada.getProduccionMaxima() + "kw");
+		String estadoaMostrar = "";
+		if(centralSeleccionada.getPowerStatus())
+			estadoaMostrar = "Encendida";
+		else
+			estadoaMostrar = "Apagada.";
+		
+		Maincontrol.lblEstado.setText("Estado: " + estadoaMostrar);
+		if(centralSeleccionada.getPowerStatus()) {
+			Maincontrol.btnArrancar.setEnabled(false);
+			Maincontrol.btnDetener.setEnabled(true);
+		}else {
+			Maincontrol.btnArrancar.setEnabled(true);
+			Maincontrol.btnDetener.setEnabled(false);
+		}
+	}
+	public static void SetCentralTrotle(int value) {
+		centralSeleccionada.setTrollet(value);
+	}
+	public static void apagarOEncenderCentral(boolean val) {	//Si es true, la enciende. False la apaga.
+		centralSeleccionada.powerOnPlant(val);
+		ReloadData();
+	}
 	public static void SelectRow(int i) {
 		Maincontrol.table.setRowSelectionInterval(i, i);
 	}

@@ -12,13 +12,15 @@ import javax.swing.JLabel;
 public class Central {
 	private ImageIcon imgStatusOn;
 	private ImageIcon imgStatusOff;
+	private boolean powerStatus;	//Considerar convertirlo en int, para más estados de la planta.
 	private int id;
 	private String nombre;
 	private int posX;
 	private int posY;
 	private int trottle;
+	protected int actualProduccion;
 	private float produccionMaxima;
-	JLabel lblpanel8;
+	private JLabel lblpanel8;	//Es el elemento que contiene la imagen en el mapa.
 	
 	Central(int id, String nombre, int posX, int posY, float produccionMaxima, ImageIcon imgStatusOn, ImageIcon imgStatusOff) {
 		super();
@@ -30,6 +32,7 @@ public class Central {
 		this.imgStatusOff = imgStatusOff;
 		this.imgStatusOn = imgStatusOn;
 		trottle = 25;
+		powerStatus = false;
 		anadir();
 	}
 	public void anadir() {
@@ -52,6 +55,21 @@ public class Central {
 			}
 		});
 	}
+	
+	public void powerOnPlant(boolean b) {	//Si es true, se encende. si no, se apaga.
+		powerStatus = b ? true : false;
+		
+		if(powerStatus) {
+			lblpanel8.setIcon(imgStatusOn);
+			Maincontrol.table.setValueAt(actualProduccion + "kw", Modelo.SearchRownById(id), 3);
+			Maincontrol.table.setValueAt(trottle + "%", Modelo.SearchRownById(id), 4);
+		}else {
+			lblpanel8.setIcon(imgStatusOff);
+			Maincontrol.table.setValueAt("off", Modelo.SearchRownById(id), 3);
+			Maincontrol.table.setValueAt("off", Modelo.SearchRownById(id), 4);
+		}
+	}
+	
 	public void Remover() {
 		lblpanel8.setVisible(false);	//Por mejorar
 	}
@@ -61,7 +79,25 @@ public class Central {
 	public int getTrollet() {
 		return trottle;
 	}
+	public boolean getPowerStatus() {
+		return powerStatus;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	public int getPosX() {
+		return posX;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public float getProduccionMaxima() {
+		return produccionMaxima;
+	}
 	public void setTrollet(int value) {
 		trottle = value;
+		if(powerStatus)
+			Maincontrol.table.setValueAt(trottle + "%", Modelo.SearchRownById(id), 4);
 	}
 }
