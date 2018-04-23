@@ -19,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class Maincontrol {
 
@@ -34,6 +36,8 @@ public class Maincontrol {
 	public static JLabel lblLocalidad;
 	public static JLabel lblCapacidad;
 	public static JLabel lblEstado;
+	public static JLabel lblProduccion;
+	public static JLabel lblProducci;
 
 	/**
 	 * Launch the application.
@@ -97,7 +101,7 @@ public class Maincontrol {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setToolTipText("Informacion");
-		panel.setBounds(288, 12, 216, 109);
+		panel.setBounds(300, 13, 216, 125);
 		frmPanelDeControl.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -114,8 +118,12 @@ public class Maincontrol {
 		panel.add(lblLocalidad);
 		
 		lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(12, 82, 192, 15);
+		lblEstado.setBounds(12, 98, 192, 15);
 		panel.add(lblEstado);
+		
+		lblProduccion = new JLabel("Produccion:");
+		lblProduccion.setBounds(12, 78, 192, 15);
+		panel.add(lblProduccion);
 		
 		btnArrancar = new JButton("ARRANCAR");
 		btnArrancar.addActionListener(new ActionListener() {
@@ -141,7 +149,7 @@ public class Maincontrol {
 		panel_1.setLayout(null);
 		
 		
-		JLabel label = new JLabel("0%");
+		JLabel label = new JLabel("1%");
 		label.setBounds(0, 13, 27, 15);
 		panel_1.add(label);
 		
@@ -154,6 +162,7 @@ public class Maincontrol {
 		panel_1.add(label_2);
 		
 		slider = new JSlider();
+		slider.setMinimum(1);
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
 				Controlador.SetCentralTrotle(slider.getValue());
@@ -164,18 +173,19 @@ public class Maincontrol {
 		panel_1.add(slider);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 255), 1, true), "INFORMACI\u00D3N GLOBAL", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBounds(574, 252, 207, 168);
 		frmPanelDeControl.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblEficiencia = new JLabel("Eficiencia:");
-		lblEficiencia.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblEficiencia.setBounds(0, 141, 195, 15);
+		JLabel lblEficiencia = new JLabel("Eficiencia media:");
+		lblEficiencia.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblEficiencia.setBounds(12, 129, 180, 15);
 		panel_2.add(lblEficiencia);
 		
-		JLabel lblProducci = new JLabel("Produccion:");
+		lblProducci = new JLabel("Produccion:");
 		lblProducci.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblProducci.setBounds(0, 114, 195, 15);
+		lblProducci.setBounds(12, 109, 180, 20);
 		panel_2.add(lblProducci);
 		
 		btnNewButton = new JButton("Construir");

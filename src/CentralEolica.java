@@ -14,5 +14,11 @@ public class CentralEolica extends Central{
 	public void anadir() {
 		super.anadir();
 	}
-
+	
+	public void Steep(Tiempo tiempo) {	//Calculará la producción en base al clima.
+		float prod = 0;
+		int f = 0;
+		prod = (tiempo.getViento()/2)/(100/super.getTrollet());
+		super.actualProduccion = (float) Math.round(prod * 10) / 10;	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?
+	}
 }

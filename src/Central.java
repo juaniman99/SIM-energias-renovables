@@ -12,13 +12,13 @@ import javax.swing.JLabel;
 public class Central {
 	private ImageIcon imgStatusOn;
 	private ImageIcon imgStatusOff;
-	private boolean powerStatus;	//Considerar convertirlo en int, para más estados de la planta.
+	private boolean powerStatus;	//Considerar convertirlo en int, para mï¿½s estados de la planta.
 	private int id;
 	private String nombre;
 	private int posX;
 	private int posY;
 	private int trottle;
-	protected int actualProduccion;
+	protected float actualProduccion;
 	private float produccionMaxima;
 	private JLabel lblpanel8;	//Es el elemento que contiene la imagen en el mapa.
 	
@@ -94,6 +94,9 @@ public class Central {
 	}
 	public float getProduccionMaxima() {
 		return produccionMaxima;
+	}
+	public float getProduccionActual() {
+		return actualProduccion;
 	}
 	public void setTrollet(int value) {
 		trottle = value;

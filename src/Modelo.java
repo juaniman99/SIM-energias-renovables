@@ -55,8 +55,11 @@ public class Modelo {
 		System.out.println("Central no encontrada");
 		return null;
 	}
+	public ArrayList<Central> getCentrales() {
+		return centrales;
+	}
 	
-	public static int SearchRownById(int idToSearch) {	//Este metodo buscará en la tabla la central con dicha id y retornará su posicion en esta.
+	public static int SearchRownById(int idToSearch) {	//Este metodo buscarï¿½ en la tabla la central con dicha id y retornarï¿½ su posicion en esta.
 		for(int i = 0; i < centrales.size(); i++) {
 			if((int) Maincontrol.table.getValueAt(i, 0) == idToSearch)
 				return i;

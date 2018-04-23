@@ -1,7 +1,7 @@
-//Project by Juan Torres Gómez
+//Project by Juan Torres Gï¿½mez
 
-/*	Esta clase almacena la hora y la fecha simulada, así como el clima y el proceso para calcularlo.
- * 	También controla los elementos que se mostrarán en la ventana de CLIMA
+/*	Esta clase almacena la hora y la fecha simulada, asï¿½ como el clima y el proceso para calcularlo.
+ * 	Tambiï¿½n controla los elementos que se mostrarï¿½n en la ventana de CLIMA
  */
 public class Tiempo {
 	private Clima[] climas;
@@ -16,8 +16,8 @@ public class Tiempo {
 	private int sol;
 	private float temperatura;
 	
-	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiará. La variable se reestablecerá a un valor aleatorio.
-	private int TicksToNextDates;	//NO CONFUNDIR. cada vez que llegue a 0, se calculará unos datos al azar basado en el clima actual.
+	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiarï¿½. La variable se reestablecerï¿½ a un valor aleatorio.
+	private int TicksToNextDates;	//NO CONFUNDIR. cada vez que llegue a 0, se calcularï¿½ unos datos al azar basado en el clima actual.
 	
 	public Tiempo() {
 		this.minuto = 00;
@@ -38,7 +38,7 @@ public class Tiempo {
 	
 	
 	public void Step() {	//Se ejecuta por cada ciclo de reloj.
-		minuto += 4;	//Cada ciclo de reloj, será 22 minutos.
+		minuto += 4;	//Cada ciclo de reloj, serï¿½ 22 minutos.
 		
 		if(minuto >= 60) {
 			minuto -= 60;
@@ -61,9 +61,9 @@ public class Tiempo {
 		SetValuesToWindow();
 	}
 	
-	private void SetValuesToWindow() {	//Este metodo plasma la mayoría de datos sobre la ventana.
+	private void SetValuesToWindow() {	//Este metodo plasma la mayorï¿½a de datos sobre la ventana.
 		Climawindow.lblFecha.setText(dateToString());
-		Climawindow.lblc.setText(temperatura + "ºc");
+		Climawindow.lblc.setText(temperatura + "ï¿½c");
 		Climawindow.lblkmh.setText(viento + "km/k");
 	}
 	
@@ -113,4 +113,26 @@ public class Tiempo {
 		
 		return diaToReturn + "/" + mesToReturn + "/" + anyoToReturn + " - " + horToReturn + ":" + minToReturn;
 	}
+
+
+	public Clima getClimaActual() {
+		return climaActual;
+	}
+
+
+	public int getViento() {
+		return viento;
+	}
+
+
+	public int getSol() {
+		return sol;
+	}
+
+
+	public float getTemperatura() {
+		return temperatura;
+	}
+	
+	
 }

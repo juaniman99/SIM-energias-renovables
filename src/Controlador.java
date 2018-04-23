@@ -1,7 +1,8 @@
-//Project by Juan Torres Gómez
+//Project by Juan Torres Gï¿½mez
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -41,7 +42,7 @@ public class Controlador {
 		}
 	}
 	public static void AnadirPlanta() {
-		//Inicia el asistente para seleccionar el tipo de planta y su posición.
+		//Inicia el asistente para seleccionar el tipo de planta y su posiciï¿½n.
 		contrucw.frmNuevaConstruccion.setVisible(true);
 	}
 	
@@ -70,11 +71,11 @@ public class Controlador {
 		modelo.removeCentral((int) Maincontrol.table.getValueAt(Maincontrol.table.getSelectedRow(), 0));
 	}
 	
-	public static void TableSelectionChangued(int v) {	//Este metodo será llamado desde la tabla de MainCOntrol cada vez que se seleccione una fila.
+	public static void TableSelectionChangued(int v) {	//Este metodo serï¿½ llamado desde la tabla de MainCOntrol cada vez que se seleccione una fila.
 		centralSeleccionada = modelo.getCentral(v);
-		ReloadData();
+		ReloadCentralData();
 	}
-	private static void ReloadData() {
+	private static void ReloadCentralData() {
 		Maincontrol.slider.setValue(centralSeleccionada.getTrollet());
 		Maincontrol.lblNombre.setText("Nombre: " + centralSeleccionada.getNombre());
 		Maincontrol.lblLocalidad.setText("Localizacion:" + "x: " + centralSeleccionada.getPosX() + ", y: " + centralSeleccionada.getPosY());
@@ -99,22 +100,41 @@ public class Controlador {
 	}
 	public static void apagarOEncenderCentral(boolean val) {	//Si es true, la enciende. False la apaga.
 		centralSeleccionada.powerOnPlant(val);
-		ReloadData();
+		ReloadCentralData();
 	}
 	public static void SelectRow(int i) {
 		Maincontrol.table.setRowSelectionInterval(i, i);
 	}
 	
-	static Timer timer = new Timer (100, new ActionListener () {	//El corazón de todo el programa. El que le da vida.
+	static Timer timer = new Timer (100, new ActionListener () {	//El corazï¿½n de todo el programa. El que le da vida.
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO ESTA ES LA FUNCIÓN QUE SE EJECUTA
+			// TODO ESTA ES LA FUNCIï¿½N QUE SE EJECUTA
 			NextStep();
 		}
 				
 	});
 	
-	private static void NextStep() {	//Principalmente este método será llamado desde el Timer de controlador, pero al ponerlo aquí me permitirá en un futuro añadir más funciones.
+	private static void NextStep() {	//Principalmente este mï¿½todo serï¿½ llamado desde el Timer de controlador, pero al ponerlo aquï¿½ me permitirï¿½ en un futuro aï¿½adir mï¿½s funciones.
 		tiempo.Step();
+		CalcularDatos();
 	}
+	
+	public static void CalcularDatos() {
+		ArrayList<Central> centrales = modelo.getCentrales();	//Obtiene las centrales.
+		float produccionTotal = 0;
+		for(int i = 0; i < centrales.size(); i++) {
+			Central cent = centrales.get(i);
+			if(cent instanceof CentralEolica)
+            {
+                CentralEolica centralE = (CentralEolica) cent;
+                centralE.Steep(tiempo);
+            }
+			
+			produccionTotal += centrales.get(i).getProduccionActual();
+		}
+		if(centralSeleccionada != null)
+			Maincontrol.lblProduccion.setText("Produccion: " + centralSeleccionada.getProduccionActual() + "kw");
+		Maincontrol.lblProducci.setText("Produccion: " + produccionTotal + "kw/h");
+	}	
 }
