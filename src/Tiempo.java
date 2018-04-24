@@ -14,6 +14,7 @@ public class Tiempo {
 	
 	private int viento;	//en km/h
 	private int sol;
+	private int solARestar;	//Al establecer el clima, se establece una "nubosidad". Este es ese factor.
 	private float temperatura;
 	
 	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiar�. La variable se reestablecer� a un valor aleatorio.
@@ -65,6 +66,7 @@ public class Tiempo {
 		Climawindow.lblFecha.setText(dateToString());
 		Climawindow.lblc.setText(temperatura + "�c");
 		Climawindow.lblkmh.setText(viento + "km/k");
+		Climawindow.label.setText(sol + "%");
 	}
 	
 	
@@ -91,6 +93,30 @@ public class Tiempo {
 		temperatura = (float) Math.round(temperatura * 100) / 100;	//Redondeo a 2 decimales
 		viento = (int) (climaActual.getVientoMedia() + (-30 + Math.random() * (30 - -30)));
 		if(viento < 0) viento = 0;
+		
+		if(climaActual.getTipo() != 3) {
+			if(hora > 6  && hora < 13)
+				sol+= (int)(Math.random()*20)+20;
+			if(hora > 17 && hora < 24)
+				sol -= 34;		
+		}else {
+			sol = 0;
+		}
+		if(climaActual.getTipo() != 0 && hora > 6  && hora < 13 && sol > 30) {
+			sol = (int) (sol - (5-Math.random() * 5)+5);
+		}		
+		sol -= solARestar;
+		if(hora > 21 && hora < 24 || hora > 0 && hora < 5) {	//Se asegura que de noche no haya sol 
+			sol = 0;
+		}
+		sol = sol < 0 ? 0 : sol;
+		sol = sol >  100 ? 100 : sol;
+		if(climaActual.getTipo() == 1 && sol > 80) {
+			sol = 80;
+		}
+		if(climaActual.getTipo() == 2 && sol > 50) {
+			sol = 50;
+		}		
 	}
 	
 	private void CambiarClima() {	//Este metodo selecciona otro clima y setea la imagen climatica correspondiente.
@@ -102,6 +128,11 @@ public class Tiempo {
 		temperatura = (float) Math.round(temperatura * 100) / 100;	//Redondeo a 2 decimales
 		viento = (int) (climaActual.getVientoMedia() + (-20 + Math.random() * (30 - -20)));
 		if(viento < 0) viento = 0;
+		
+		if(climaActual.getTipo() != 0) {
+			sol = (int) (temperatura - (Math.random() * 4)+2)*climaActual.getTipo();
+			sol = sol < 0 ? 0 : sol;
+		}
 	}
 
 	public String dateToString() {

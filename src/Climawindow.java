@@ -1,4 +1,4 @@
-//Project by Juan Torres Gómez
+//Project by Juan Torres Gï¿½mez
 
 //	Los elementos mostrados son controlados por la Clase Tiempo.
 
@@ -21,7 +21,7 @@ public class Climawindow {
 	public static JLabel lblFecha;
 	public JLabel lblSol;
 	public JLabel lblLluvia;
-	public JLabel label;
+	public static JLabel label;
 	public JLabel lblTemperatura;
 	public static JLabel lblc;
 	public static JLabel lblkmh;

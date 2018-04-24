@@ -10,7 +10,11 @@ public class CentralSolar extends Central{
 	public void Steep(Tiempo tiempo) {	//Calculará la producción en base al clima.
 		float prod = 0;
 		int f = 0;
-		prod = ((tiempo.getSol()/1.6f)+(13-super.getPosY()))		/(100/super.getTrollet());
+		if(tiempo.getSol() > 3) {
+			prod = (float)((tiempo.getSol()/3))/(100/super.getTrollet());
+			prod += (super.getPosY()/300)*7;
+		}
+		System.out.println("prod: " + prod);
 		prod = prod < 0 ? 0 : prod;
 		super.setProduccionActual((float) Math.round(prod * 10) / 10);	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?
 	}
