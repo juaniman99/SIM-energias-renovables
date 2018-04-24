@@ -24,7 +24,7 @@ public class Controlador {
 		climaw = new Climawindow();
 		contrucw = new WindowConstruir();
 		climaw.frmClima.setVisible(true);
-		loginw.frame.setVisible(true);
+		//loginw.frame.setVisible(true);
 		mapw.frmMapa.setVisible(true);
 		modelo = new Modelo();
 		tiempo = new Tiempo();
@@ -130,7 +130,11 @@ public class Controlador {
                 CentralEolica centralE = (CentralEolica) cent;
                 centralE.Steep(tiempo);
             }
-			
+			if(cent instanceof CentralSolar)
+            {
+				CentralSolar centralS = (CentralSolar) cent;
+                centralS.Steep(tiempo);
+            }
 			produccionTotal += centrales.get(i).getProduccionActual();
 		}
 		if(centralSeleccionada != null)

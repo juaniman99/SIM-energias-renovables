@@ -144,7 +144,7 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().add(btnDetener);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(305, 372, 257, 48);
+		panel_1.setBounds(305, 372, 239, 48);
 		frmPanelDeControl.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -154,7 +154,7 @@ public class Maincontrol {
 		panel_1.add(label);
 		
 		JLabel label_1 = new JLabel("100%");
-		label_1.setBounds(210, 13, 47, 15);
+		label_1.setBounds(192, 13, 47, 15);
 		panel_1.add(label_1);
 		
 		JLabel label_2 = new JLabel("50%");
@@ -169,23 +169,23 @@ public class Maincontrol {
 				label_2.setText(slider.getValue() + "%");
 			}
 		});
-		slider.setBounds(25, 12, 186, 16);
+		slider.setBounds(25, 12, 167, 16);
 		panel_1.add(slider);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 255), 1, true), "INFORMACI\u00D3N GLOBAL", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(574, 252, 207, 168);
+		panel_2.setBounds(548, 252, 233, 168);
 		frmPanelDeControl.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblEficiencia = new JLabel("Eficiencia media:");
 		lblEficiencia.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblEficiencia.setBounds(12, 129, 180, 15);
+		lblEficiencia.setBounds(12, 129, 196, 15);
 		panel_2.add(lblEficiencia);
 		
 		lblProducci = new JLabel("Produccion:");
-		lblProducci.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblProducci.setBounds(12, 109, 180, 20);
+		lblProducci.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblProducci.setBounds(12, 109, 209, 20);
 		panel_2.add(lblProducci);
 		
 		btnNewButton = new JButton("Construir");

@@ -18,7 +18,7 @@ public class Central {
 	private int posX;
 	private int posY;
 	private int trottle;
-	protected float actualProduccion;
+	private float actualProduccion;
 	private float produccionMaxima;
 	private JLabel lblpanel8;	//Es el elemento que contiene la imagen en el mapa.
 	
@@ -102,5 +102,10 @@ public class Central {
 		trottle = value;
 		if(powerStatus)
 			Maincontrol.table.setValueAt(trottle + "%", Modelo.SearchRownById(id), 4);
+	}
+	protected void setProduccionActual(float value) {
+		actualProduccion = value;
+		if(!powerStatus)
+			Maincontrol.table.setValueAt(actualProduccion + "kw", Modelo.SearchRownById(id), 3);
 	}
 }
