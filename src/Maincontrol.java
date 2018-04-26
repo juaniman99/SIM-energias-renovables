@@ -8,9 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JSlider;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
@@ -38,7 +40,10 @@ public class Maincontrol {
 	public static JLabel lblEstado;
 	public static JLabel lblProduccion;
 	public static JLabel lblProducci;
-
+	private JLabel label_3;
+	public static JLabel lblEnergiaDemandada;
+	public static JLabel lblPoblacin;
+	public static JLabel lblEficiencia;
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +75,7 @@ public class Maincontrol {
 		frmPanelDeControl = new JFrame();
 		frmPanelDeControl.setTitle("Panel de control");
 		frmPanelDeControl.setResizable(false);
-		frmPanelDeControl.setBounds(100, 100, 793, 460);
+		frmPanelDeControl.setBounds(400, 100, 793, 460);
 		frmPanelDeControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPanelDeControl.getContentPane().setLayout(null);
 		
@@ -101,28 +106,28 @@ public class Maincontrol {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setToolTipText("Informacion");
-		panel.setBounds(300, 13, 216, 125);
+		panel.setBounds(288, 13, 239, 125);
 		frmPanelDeControl.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		 lblNombre = new JLabel("Nombre: ");
-		lblNombre.setBounds(12, 23, 192, 15);
+		lblNombre.setBounds(12, 23, 215, 15);
 		panel.add(lblNombre);
 		
 		lblCapacidad = new JLabel("Produccion MAX:");
-		lblCapacidad.setBounds(12, 62, 192, 15);
+		lblCapacidad.setBounds(12, 62, 215, 15);
 		panel.add(lblCapacidad);
 		
 		lblLocalidad = new JLabel("Localizacion:");
-		lblLocalidad.setBounds(12, 41, 192, 15);
+		lblLocalidad.setBounds(12, 41, 215, 15);
 		panel.add(lblLocalidad);
 		
 		lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(12, 98, 192, 15);
+		lblEstado.setBounds(12, 98, 215, 15);
 		panel.add(lblEstado);
 		
 		lblProduccion = new JLabel("Produccion:");
-		lblProduccion.setBounds(12, 78, 192, 15);
+		lblProduccion.setBounds(12, 78, 215, 15);
 		panel.add(lblProduccion);
 		
 		btnArrancar = new JButton("ARRANCAR");
@@ -131,7 +136,7 @@ public class Maincontrol {
 				Controlador.apagarOEncenderCentral(true);
 			}
 		});
-		btnArrancar.setBounds(300, 174, 95, 60);
+		btnArrancar.setBounds(288, 174, 112, 60);
 		frmPanelDeControl.getContentPane().add(btnArrancar);
 		
 		btnDetener = new JButton("DETENER");
@@ -140,11 +145,11 @@ public class Maincontrol {
 				Controlador.apagarOEncenderCentral(false);
 			}
 		});
-		btnDetener.setBounds(405, 174, 95, 60);
+		btnDetener.setBounds(412, 174, 115, 60);
 		frmPanelDeControl.getContentPane().add(btnDetener);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(305, 372, 239, 48);
+		panel_1.setBounds(288, 301, 239, 48);
 		frmPanelDeControl.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -174,19 +179,27 @@ public class Maincontrol {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 255), 1, true), "INFORMACI\u00D3N GLOBAL", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(548, 252, 233, 168);
+		panel_2.setBounds(548, 197, 233, 223);
 		frmPanelDeControl.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblEficiencia = new JLabel("Eficiencia media:");
+		lblEficiencia = new JLabel("Eficiencia media:");
 		lblEficiencia.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblEficiencia.setBounds(12, 129, 196, 15);
+		lblEficiencia.setBounds(12, 171, 196, 15);
 		panel_2.add(lblEficiencia);
 		
 		lblProducci = new JLabel("Produccion:");
 		lblProducci.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblProducci.setBounds(12, 109, 209, 20);
+		lblProducci.setBounds(12, 112, 209, 20);
 		panel_2.add(lblProducci);
+		
+		lblPoblacin = new JLabel("Población: ");
+		lblPoblacin.setBounds(12, 144, 209, 15);
+		panel_2.add(lblPoblacin);
+		
+		lblEnergiaDemandada = new JLabel("Demandada:");
+		lblEnergiaDemandada.setBounds(12, 89, 209, 15);
+		panel_2.add(lblEnergiaDemandada);
 		
 		btnNewButton = new JButton("Construir");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -205,5 +218,20 @@ public class Maincontrol {
 		});
 		btnDemoler.setBounds(148, 390, 128, 30);
 		frmPanelDeControl.getContentPane().add(btnDemoler);
+		
+		JLabel lblCentralheader = new JLabel("CentralHeader");
+		lblCentralheader.setBounds(580, 0, 160, 170);
+		lblCentralheader.setIcon( new ImageIcon(new ImageIcon("images/molino_header.png").getImage().getScaledInstance(160, 170, Image.SCALE_DEFAULT)));
+		frmPanelDeControl.getContentPane().add(lblCentralheader);
+		
+		JLabel lblNewLabel = new JLabel("DINERO");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 10));
+		lblNewLabel.setBounds(294, 384, 75, 15);
+		frmPanelDeControl.getContentPane().add(lblNewLabel);
+		
+		label_3 = new JLabel("1000€");
+		label_3.setFont(new Font("Dialog", Font.BOLD, 24));
+		label_3.setBounds(304, 399, 96, 21);
+		frmPanelDeControl.getContentPane().add(label_3);
 	}
 }

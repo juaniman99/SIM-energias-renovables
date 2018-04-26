@@ -48,10 +48,10 @@ public class Mapwindow {
 		frmMapa.setIconImage(Toolkit.getDefaultToolkit().getImage("images/molino_off.png"));
 		frmMapa.setTitle("Mapa");
 		frmMapa.setResizable(false);
-		frmMapa.setBounds(100, 100, 529, 361);
+		frmMapa.setBounds(4, 100, 529, 361);
 		frmMapa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMapa.getContentPane().setLayout(null);
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon("images/mapa.png").getImage().getScaledInstance(529, 333, Image.SCALE_DEFAULT));
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon("images/mapa.png").getImage().getScaledInstance(535, 333, Image.SCALE_DEFAULT));
 		
 		/////////	Cargo los distintos modelos de imagenes	////////
 		ImageIcon panelOn = new ImageIcon(new ImageIcon("images/panel_on.gif").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
@@ -60,7 +60,7 @@ public class Mapwindow {
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setOpaque(false);
-		panel_1.setBounds(0, 0, 529, 333);
+		panel_1.setBounds(0, 0, 535, 333);
 		frmMapa.getContentPane().add(panel_1);
 		///////////////////////////////////////////////////////////
 		
