@@ -3,4 +3,6 @@
 
 
 > Por hacer <
-- Sistema de econom�a
+- Sistema de econom\EDa
+
+-Se puede estalecer niveles de dificultad haciendo que se creen más habitantes por día.

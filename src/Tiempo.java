@@ -48,6 +48,7 @@ public class Tiempo {
 		if(hora >= 24) {
 			hora = 0;
 			dia++;
+			newDay();
 		}
 		if(dia > 31) {
 			dia = 1;
@@ -69,6 +70,10 @@ public class Tiempo {
 		Climawindow.label.setText(sol + "%");
 	}
 	
+	private void newDay() {	//Es ejecutado cada día nuevo. Es llamada desde más arriba.
+		//Cada día, se actualizan los ciudadanos;
+		Controlador.actualizarCiudadanos();
+	}
 	
 	private void CheckTicks() {
 		System.out.println(ticksToNextEvent + " \t " + TicksToNextDates  + " \t " + temperatura);

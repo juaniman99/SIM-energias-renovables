@@ -4,16 +4,33 @@ public class Modelo {
 	private String[]  usuariosLogin = {"root", "juan", "nodex"};
 	private String[]  contrasenasLogin = {"root", "1234", "4321"};
 	private static ArrayList<Central> centrales;
+	private ArrayList<Ciudadano> ciudadanos;
+	private float consumoPoblacion;
 	
 	Modelo(){
 		centrales = new ArrayList<>();
-		
+		ciudadanos = new ArrayList<>();
 		//Crea 3 centrales iniciales
 		addCentral("Eolica", "11", 100, (int)(Math.random()*400), (int)(Math.random()*200), 200);
 		addCentral("Eolica", "22", 101, (int)(Math.random()*400), (int)(Math.random()*200), 200);
 		addCentral("Eolica", "33", 102, (int)(Math.random()*400), (int)(Math.random()*200), 200);
 		addCentral("Eolica", "22", 103, (int)(Math.random()*400), (int)(Math.random()*200), 50);
 		addCentral("Solar", "33", 104, (int)(Math.random()*400), (int)(Math.random()*200), 100);
+		for(int i = 0; i < 30; i++) {	//El simulador empieza con 30 personas.
+			ciudadanos.add(new Ciudadano());
+		}
+	}
+	public void addPersona() {
+		ciudadanos.add(new Ciudadano());
+	}
+	public  ArrayList<Ciudadano> getCiudadanos() {
+		return ciudadanos;
+	}
+	public int getNumCiud() {
+		return ciudadanos.size();
+	}
+	public void deleteCiud(int indice) {
+		ciudadanos.remove(indice);
 	}
 	public void addCentral(String tipo, String nombre, int id, int posX, int posY, float produccionMaxima) {
 		if(tipo.equals("Eolica"))
@@ -75,6 +92,10 @@ public class Modelo {
 			}
 		}
 		return false;
+	}
+	
+	public void setConsumoPoblacion(float value) {
+		consumoPoblacion = value;
 	}
 	
 }

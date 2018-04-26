@@ -105,8 +105,8 @@ public class Controlador {
 	public static void SelectRow(int i) {
 		Maincontrol.table.setRowSelectionInterval(i, i);
 	}
-	
-	static Timer timer = new Timer (100, new ActionListener () {	//El coraz�n de todo el programa. El que le da vida.
+	//El timer volver a ponerlo a 80.
+	static Timer timer = new Timer (24, new ActionListener () {	//El coraz�n de todo el programa. El que le da vida.
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO ESTA ES LA FUNCI�N QUE SE EJECUTA
@@ -140,5 +140,27 @@ public class Controlador {
 		if(centralSeleccionada != null)
 			Maincontrol.lblProduccion.setText("Produccion: " + centralSeleccionada.getProduccionActual() + "kw");
 		Maincontrol.lblProducci.setText("Produccion: " + produccionTotal + "kw/h");
+		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());
 	}	
+	
+	public static void actualizarCiudadanos() {	//Es llamado cada nuevo día desde TIEMPO.java
+		ArrayList<Ciudadano> ciu = modelo.getCiudadanos();
+		System.out.println("Ac ciu");
+		float toGenerar = 0;
+		int ramdonCiuToAdd = (int)(Math.random()*22)+3;
+		for(int i = 0; i < ramdonCiuToAdd; i++) {	//Inserto personas de forma aleatoria.
+			modelo.addPersona();
+		}
+		for(int i = 0; i < ciu.size(); i++) {
+			ciu.get(i).addEdad();	//Va sumando la edad a todos.
+			if(ciu.get(i).imDead())	//Segundo comprueba los que han de morir.
+				modelo.deleteCiud(i);
+			toGenerar += ciu.get(i).getConsumoMedio();
+		}
+		modelo.setConsumoPoblacion(toGenerar);	
+		
+		System.out.println("toGenerar: " + toGenerar);
+		Maincontrol.lblEnergiaDemandada.setText("Demanda: " + toGenerar);
+		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());
+	}
 }
