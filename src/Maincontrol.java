@@ -229,7 +229,7 @@ public class Maincontrol {
 		lblNewLabel.setBounds(294, 384, 75, 15);
 		frmPanelDeControl.getContentPane().add(lblNewLabel);
 		
-		label_3 = new JLabel("1000€");
+		label_3 = new JLabel("1000\u20AC");
 		label_3.setFont(new Font("Dialog", Font.BOLD, 24));
 		label_3.setBounds(304, 399, 148, 21);
 		frmPanelDeControl.getContentPane().add(label_3);

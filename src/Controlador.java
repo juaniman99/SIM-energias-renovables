@@ -142,12 +142,12 @@ public class Controlador {
 			Maincontrol.lblProduccion.setText("Produccion: " + centralSeleccionada.getProduccionActual() + "kw");
 		float dineroToAdd;
 		if(modelo.getProduccion() >= modelo.getConsumoPoblacion()) {	//Solo se va a vender la electricidad solicitada, y la sobrante no. Sin embargo, si no se genera la suficiente para todo el mundo, se venderá toda la disponible.
-			dineroToAdd = (modelo.getConsumoPoblacion()/80);	// Esta es la sencilla formula que simulará el precio del kw
+			dineroToAdd = (modelo.getConsumoPoblacion()/110);	// Esta es la sencilla formula que simulará el precio del kw
 		}else {
-			dineroToAdd = (modelo.getProduccion()/80); 
+			dineroToAdd = (modelo.getProduccion()/110); 
 		}
 		modelo.addDinero(dineroToAdd);
-		Maincontrol.label_3.setText(modelo.getDinero() + "€");
+		Maincontrol.label_3.setText(modelo.getDinero() + "�");
 		Maincontrol.lblProducci.setText("Produccion: " + produccionTotal + "kw/h");
 		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());
 	}	

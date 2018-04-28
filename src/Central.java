@@ -105,7 +105,7 @@ public class Central {
 	}
 	protected void setProduccionActual(float value) {
 		actualProduccion = value;
-		if(!powerStatus)
+		if(powerStatus)
 			Maincontrol.table.setValueAt(actualProduccion + "kw", Modelo.SearchRownById(id), 3);
 	}
 }

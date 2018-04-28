@@ -18,7 +18,7 @@ public class Modelo {
 		addCentral("Eolica", "33", 102, (int)(Math.random()*400), (int)(Math.random()*200), 200);
 		addCentral("Eolica", "22", 103, (int)(Math.random()*400), (int)(Math.random()*200), 50);
 		addCentral("Solar", "33", 104, (int)(Math.random()*400), (int)(Math.random()*200), 100);
-		for(int i = 0; i < 30; i++) {	//El simulador empieza con 30 personas.
+		for(int i = 0; i < 10; i++) {	//El simulador empieza con 10 personas.
 			ciudadanos.add(new Ciudadano());
 		}
 	}
@@ -46,7 +46,8 @@ public class Modelo {
 		else if(tipo.equals("Solar"))
 			centrales.add(new CentralSolar(id, nombre, posX, posY, produccionMaxima));
 
-		Maincontrol.model.addRow(new Object[] {id, nombre, tipo, "...", "25%"});			
+		Maincontrol.model.addRow(new Object[] {id, nombre, tipo, "...", "25%"});
+		centrales.get(centrales.size()-1).powerOnPlant(true);
 	}
 	public void removeCentral(int idToRemove) {
 		Maincontrol.model.removeRow(SearchRownById(idToRemove));

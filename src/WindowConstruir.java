@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 public class WindowConstruir {
 
@@ -27,6 +29,10 @@ public class WindowConstruir {
 	public JTextField textField_2;
 	public JLabel lblX;
 	public JLabel lblY;
+	public JPanel panel;
+	public JLabel lblDescripcion;
+	public JLabel lblPosicion;
+	public JLabel lblCoste;
 	
 
 	public static void main(String[] args) {
@@ -58,7 +64,7 @@ public class WindowConstruir {
 		frmNuevaConstruccion.setAlwaysOnTop(true);
 		frmNuevaConstruccion.setResizable(false);
 		frmNuevaConstruccion.setTitle("Nueva construccion");
-		frmNuevaConstruccion.setBounds(100, 100, 431, 207);
+		frmNuevaConstruccion.setBounds(100, 100, 431, 275);
 		frmNuevaConstruccion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNuevaConstruccion.getContentPane().setLayout(null);
 		
@@ -84,6 +90,11 @@ public class WindowConstruir {
 		frmNuevaConstruccion.getContentPane().add(btnNewButton);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmNuevaConstruccion.setVisible(false);
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBounds(184, 132, 86, 32);
 		frmNuevaConstruccion.getContentPane().add(btnCancelar);
@@ -113,24 +124,45 @@ public class WindowConstruir {
 		
 		textField_1 = new JTextField();
 		textField_1.setText("150");
-		textField_1.setBounds(237, 30, 46, 20);
+		textField_1.setBounds(306, 30, 46, 20);
 		frmNuevaConstruccion.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setText("125");
 		textField_2.setColumns(10);
-		textField_2.setBounds(289, 30, 46, 20);
+		textField_2.setBounds(358, 30, 46, 20);
 		frmNuevaConstruccion.getContentPane().add(textField_2);
 		
 		lblX = new JLabel("X");
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setBounds(237, 11, 46, 14);
+		lblX.setBounds(306, 11, 46, 14);
 		frmNuevaConstruccion.getContentPane().add(lblX);
 		
 		lblY = new JLabel("Y");
 		lblY.setHorizontalAlignment(SwingConstants.CENTER);
-		lblY.setBounds(289, 11, 46, 14);
+		lblY.setBounds(358, 11, 46, 14);
 		frmNuevaConstruccion.getContentPane().add(lblY);
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Descripcion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 165, 405, 79);
+		frmNuevaConstruccion.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		lblDescripcion = new JLabel("descripcion");
+		lblDescripcion.setVerticalAlignment(SwingConstants.TOP);
+		lblDescripcion.setBounds(10, 23, 385, 45);
+		panel.add(lblDescripcion);
+		
+		lblPosicion = new JLabel("Posicion:");
+		lblPosicion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPosicion.setBounds(224, 31, 72, 17);
+		frmNuevaConstruccion.getContentPane().add(lblPosicion);
+		
+		lblCoste = new JLabel("Coste: 0\u20AC");
+		lblCoste.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblCoste.setBounds(268, 80, 114, 24);
+		frmNuevaConstruccion.getContentPane().add(lblCoste);
 	}
 }
