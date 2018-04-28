@@ -6,6 +6,8 @@ public class Modelo {
 	private static ArrayList<Central> centrales;
 	private ArrayList<Ciudadano> ciudadanos;
 	private float consumoPoblacion;
+	private float produccion;
+	private float dinero = 500;
 	
 	Modelo(){
 		centrales = new ArrayList<>();
@@ -31,6 +33,12 @@ public class Modelo {
 	}
 	public void deleteCiud(int indice) {
 		ciudadanos.remove(indice);
+	}
+	public void setProduccion(float i) {
+		produccion = i;
+	}
+	public float getProduccion() {
+		return produccion;
 	}
 	public void addCentral(String tipo, String nombre, int id, int posX, int posY, float produccionMaxima) {
 		if(tipo.equals("Eolica"))
@@ -94,8 +102,20 @@ public class Modelo {
 		return false;
 	}
 	
+	public void addDinero(float i) {
+		dinero += i;
+	}
+	public void removeDinero(int i) {
+		dinero -= i;
+	}
+	public int getDinero() {
+		return (int)(dinero);
+	}
+	
 	public void setConsumoPoblacion(float value) {
 		consumoPoblacion = value;
 	}
-	
+	public float getConsumoPoblacion() {
+		return consumoPoblacion;
+	}
 }

@@ -40,7 +40,7 @@ public class Maincontrol {
 	public static JLabel lblEstado;
 	public static JLabel lblProduccion;
 	public static JLabel lblProducci;
-	private JLabel label_3;
+	public static JLabel label_3;
 	public static JLabel lblEnergiaDemandada;
 	public static JLabel lblPoblacin;
 	public static JLabel lblEficiencia;
@@ -231,7 +231,7 @@ public class Maincontrol {
 		
 		label_3 = new JLabel("1000€");
 		label_3.setFont(new Font("Dialog", Font.BOLD, 24));
-		label_3.setBounds(304, 399, 96, 21);
+		label_3.setBounds(304, 399, 148, 21);
 		frmPanelDeControl.getContentPane().add(label_3);
 	}
 }

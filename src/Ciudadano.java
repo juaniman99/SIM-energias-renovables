@@ -11,9 +11,9 @@ public class Ciudadano {
 	
 	Ciudadano(){
 		edad = 0;
-		edadMuerte = (int)(Math.random()*6)+5;	//Es extraño, pero he sacrificado realismo (suponiendo que las personas como mucho pueden vivir 11 dias) por "funcionalidad".
+		edadMuerte = (int)(Math.random()*8)+4;	//Es extraño, pero he sacrificado realismo (suponiendo que las personas como mucho pueden vivir 11 dias) por "funcionalidad".
 		sexo =  (int)(Math.random()*2);
-		double conMedioToSet = 0.01 + Math.random() * (0.9 - 0.01);
+		double conMedioToSet = 0.01 + Math.random() * (1.9 - 0.01);
 		consumoMedio = (float)conMedioToSet;
 	}
 	
