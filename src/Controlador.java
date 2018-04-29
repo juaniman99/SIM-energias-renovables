@@ -19,15 +19,15 @@ public class Controlador {
 	private static Central centralSeleccionada;
 	
 	public static void Iniciar(){
+		tiempo = new Tiempo();
 		loginw = new Loginwindow();
 		mapw = new Mapwindow();
 		climaw = new Climawindow();
+		modelo = new Modelo();
 		contrucw = new WindowConstruir();
 		climaw.frmClima.setVisible(true);
 		//loginw.frame.setVisible(true);
 		mapw.frmMapa.setVisible(true);
-		modelo = new Modelo();
-		tiempo = new Tiempo();
 		actualizarCiudadanos();
 	    timer.start();
 	}
@@ -46,12 +46,12 @@ public class Controlador {
 		contrucw.frmNuevaConstruccion.setVisible(true);
 	}
 	
-	public static void ConstruirPlanta(String tipo, String nombre, int posX, int posY, String produccionMaxima) {
+	public static void ConstruirPlanta(String tipo, String nombre, int posX, int posY, String produccionMaxima, int coste) {
 		int prodMax = 0;
 		if(produccionMaxima.equals("XS"))
 			prodMax = 10;
 		else if(produccionMaxima.equals("S"))
-			prodMax = 15;
+			prodMax = 25;
 		else if(produccionMaxima.equals("M"))
 			prodMax = 50;
 		else if(produccionMaxima.equals("L"))
@@ -64,7 +64,8 @@ public class Controlador {
 			ids = (int)(Math.random()*999-100)+100;
 		}
 		
-		modelo.addCentral(tipo, nombre, ids, posX, posY, prodMax);
+		modelo.addCentral(tipo, nombre + " " + produccionMaxima, ids, posX, posY, prodMax);
+		modelo.removeDinero(coste);
 	}
 	
 	public static void DemolerPlanta() {
@@ -106,7 +107,7 @@ public class Controlador {
 		Maincontrol.table.setRowSelectionInterval(i, i);
 	}
 	//El timer volver a ponerlo a 80.
-	static Timer timer = new Timer (24, new ActionListener () {	//El coraz�n de todo el programa. El que le da vida.
+	static Timer timer = new Timer (80, new ActionListener () {	//El coraz�n de todo el programa. El que le da vida.
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO ESTA ES LA FUNCI�N QUE SE EJECUTA
@@ -171,5 +172,9 @@ public class Controlador {
 		System.out.println("toGenerar: " + toGenerar);
 		Maincontrol.lblEnergiaDemandada.setText("Demanda: " + toGenerar);
 		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());		
+	}
+	
+	public static int getDinero() {	//De momento solo la utilizo en Construir.java
+		return modelo.getDinero();
 	}
 }

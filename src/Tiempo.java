@@ -90,7 +90,7 @@ public class Tiempo {
 	}
 	
 	private void GenerarClima() {	//Este metodo va variando a lo largo de los ticks los datos del clima actual.
-		if(hora > 5 && hora < 18)
+		if(hora > 5 && hora < 20)
 			temperatura = (float) (temperatura + (-2.6 + Math.random() * (2 - -2.6)));
 		else
 			temperatura = (float) (temperatura + (-2.6 + Math.random() * (2 - -2.6)));

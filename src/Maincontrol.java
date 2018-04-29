@@ -75,7 +75,7 @@ public class Maincontrol {
 		frmPanelDeControl = new JFrame();
 		frmPanelDeControl.setTitle("Panel de control");
 		frmPanelDeControl.setResizable(false);
-		frmPanelDeControl.setBounds(400, 100, 793, 460);
+		frmPanelDeControl.setBounds(550, 100, 793, 460);
 		frmPanelDeControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPanelDeControl.getContentPane().setLayout(null);
 		

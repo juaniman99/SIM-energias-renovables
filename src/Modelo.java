@@ -13,11 +13,11 @@ public class Modelo {
 		centrales = new ArrayList<>();
 		ciudadanos = new ArrayList<>();
 		//Crea 3 centrales iniciales
-		addCentral("Eolica", "11", 100, (int)(Math.random()*400), (int)(Math.random()*200), 200);
-		addCentral("Eolica", "22", 101, (int)(Math.random()*400), (int)(Math.random()*200), 200);
-		addCentral("Eolica", "33", 102, (int)(Math.random()*400), (int)(Math.random()*200), 200);
-		addCentral("Eolica", "22", 103, (int)(Math.random()*400), (int)(Math.random()*200), 50);
-		addCentral("Solar", "33", 104, (int)(Math.random()*400), (int)(Math.random()*200), 100);
+		addCentral("Eolica", "11 S", 100, (int)(Math.random()*400), (int)(Math.random()*200), 25);
+		addCentral("Eolica", "22 M", 101, (int)(Math.random()*400), (int)(Math.random()*200), 50);
+		addCentral("Eolica", "33 M", 102, (int)(Math.random()*400), (int)(Math.random()*200), 50);
+		addCentral("Eolica", "22 M", 103, (int)(Math.random()*400), (int)(Math.random()*200), 50);
+		addCentral("Solar", "33 L", 104, (int)(Math.random()*400), (int)(Math.random()*200), 200);
 		for(int i = 0; i < 10; i++) {	//El simulador empieza con 10 personas.
 			ciudadanos.add(new Ciudadano());
 		}

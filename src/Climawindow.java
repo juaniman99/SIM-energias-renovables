@@ -56,7 +56,7 @@ public class Climawindow {
 		frmClima = new JFrame();
 		frmClima.setTitle("Info clima");
 		frmClima.setResizable(false);
-		frmClima.setBounds(100, 100, 423, 224);
+		frmClima.setBounds(100, 450, 423, 224);
 		frmClima.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmClima.getContentPane().setLayout(null);
 		

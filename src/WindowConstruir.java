@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 public class WindowConstruir {
 
 	public static JFrame frmNuevaConstruccion;
+	Construir construir;
 	public JLabel lblNuevaConstruccin;
 	public JComboBox comboBox;
 	public JButton btnNewButton;
@@ -53,7 +54,10 @@ public class WindowConstruir {
 	 * Create the application.
 	 */
 	public WindowConstruir() {
+		construir = new Construir(this);
 		initialize();
+		construir.setLoadedTrue();
+		construir.calcularCoste();
 	}
 
 	/**
@@ -65,15 +69,37 @@ public class WindowConstruir {
 		frmNuevaConstruccion.setResizable(false);
 		frmNuevaConstruccion.setTitle("Nueva construccion");
 		frmNuevaConstruccion.setBounds(100, 100, 431, 275);
-		frmNuevaConstruccion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frmNuevaConstruccion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNuevaConstruccion.getContentPane().setLayout(null);
 		
-		lblNuevaConstruccin = new JLabel("Nueva construcci\u00F3n");
+		lblNuevaConstruccin = new JLabel("Nueva construccion");
 		lblNuevaConstruccin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lblNuevaConstruccin.setBounds(4, 11, 165, 32);
 		frmNuevaConstruccion.getContentPane().add(lblNuevaConstruccin);
 		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Descripcion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 165, 405, 79);
+		frmNuevaConstruccion.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		lblDescripcion = new JLabel("descripcion");
+		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDescripcion.setVerticalAlignment(SwingConstants.TOP);
+		lblDescripcion.setBounds(10, 23, 385, 45);
+		panel.add(lblDescripcion);
+		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				construir.calcularCoste();
+				if(comboBox.getSelectedItem().equals("Eolica"))
+					lblDescripcion.setText("<html><p>Una buena opción. Genera electricidad aprovechando el movimiento del aire. Que giren esas aspas!</p></html>");
+				if(comboBox.getSelectedItem().equals("Solar"))
+					lblDescripcion.setText("<html><p>No cabe duda que el sol no sirve solo para broncearse. Quizás no sea la central más productiva, pero aprovecha el sol para producir unos cuantos KW a un buen precio.</p></html>");
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Solar", "Eolica"}));
 		comboBox.setSelectedIndex(1);
 		comboBox.setBounds(83, 77, 86, 20);
@@ -82,7 +108,7 @@ public class WindowConstruir {
 		btnNewButton = new JButton("Construir!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.ConstruirPlanta(String.valueOf(comboBox.getSelectedItem()), textField.getText(), Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_2.getText()), String.valueOf(comboBox_1.getSelectedItem()));	//el 10 hay que modificarlo
+				construir.requestConstruir();
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 17));
@@ -108,6 +134,11 @@ public class WindowConstruir {
 		frmNuevaConstruccion.getContentPane().add(lblProduccion);
 		
 		comboBox_1 = new JComboBox();
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				construir.calcularCoste();
+			}
+		});
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"XS", "S", "M", "L", "XL"}));
 		comboBox_1.setSelectedIndex(1);
 		comboBox_1.setBounds(83, 100, 86, 20);
@@ -144,16 +175,7 @@ public class WindowConstruir {
 		lblY.setBounds(358, 11, 46, 14);
 		frmNuevaConstruccion.getContentPane().add(lblY);
 		
-		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Descripcion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 165, 405, 79);
-		frmNuevaConstruccion.getContentPane().add(panel);
-		panel.setLayout(null);
 		
-		lblDescripcion = new JLabel("descripcion");
-		lblDescripcion.setVerticalAlignment(SwingConstants.TOP);
-		lblDescripcion.setBounds(10, 23, 385, 45);
-		panel.add(lblDescripcion);
 		
 		lblPosicion = new JLabel("Posicion:");
 		lblPosicion.setFont(new Font("Tahoma", Font.PLAIN, 13));

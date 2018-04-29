@@ -104,6 +104,8 @@ public class Central {
 			Maincontrol.table.setValueAt(trottle + "%", Modelo.SearchRownById(id), 4);
 	}
 	protected void setProduccionActual(float value) {
+		if(value > produccionMaxima)	//Esto es simplemente por la "calidad" de la central. No es el mejor modo pero es funcional.
+			value = produccionMaxima;
 		actualProduccion = value;
 		if(powerStatus)
 			Maincontrol.table.setValueAt(actualProduccion + "kw", Modelo.SearchRownById(id), 3);
