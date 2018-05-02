@@ -1,3 +1,5 @@
+//Project by Juan Torres
+
 import java.awt.Image;
 import javax.swing.ImageIcon;
 

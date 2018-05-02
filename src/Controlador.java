@@ -17,6 +17,7 @@ public class Controlador {
 	static Climawindow climaw;
 	static WindowConstruir contrucw;
 	private static Central centralSeleccionada;
+	private static int simulationSpeed;
 	
 	public static void Iniciar(){
 		tiempo = new Tiempo();
@@ -29,6 +30,7 @@ public class Controlador {
 		//loginw.frame.setVisible(true);
 		mapw.frmMapa.setVisible(true);
 		actualizarCiudadanos();
+		simulationSpeed = 80;
 	    timer.start();
 	}
 	
@@ -120,7 +122,24 @@ public class Controlador {
 		tiempo.Step();
 		CalcularDatos();
 	}
-	
+	public static void changueSimulationSpeed(int value) {
+		simulationSpeed = value;
+		timer.stop();
+        timer.setDelay( simulationSpeed );
+        timer.start();
+		System.out.println(simulationSpeed);
+	}
+	public static void playStopTimer() {
+		if(Maincontrol.btnPausar.getText().equals("Pausar")) {
+			timer.stop();
+			Maincontrol.slider_1.setEnabled(false);
+			Maincontrol.btnPausar.setText("Reanudar");
+		}else {
+			timer.start();
+			Maincontrol.slider_1.setEnabled(true);
+			Maincontrol.btnPausar.setText("Pausar");
+		}
+	}
 	public static void CalcularDatos() {
 		ArrayList<Central> centrales = modelo.getCentrales();	//Obtiene las centrales.
 		float produccionTotal = 0;

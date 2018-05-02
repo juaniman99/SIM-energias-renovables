@@ -1,3 +1,5 @@
+//Project by Juan Torres
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -44,6 +46,11 @@ public class Maincontrol {
 	public static JLabel lblEnergiaDemandada;
 	public static JLabel lblPoblacin;
 	public static JLabel lblEficiencia;
+	public JPanel panel_3;
+	public JLabel lblMin;
+	public JLabel lblMin_1;
+	public static JSlider slider_1;
+	public static JButton btnPausar;
 	/**
 	 * Launch the application.
 	 */
@@ -179,7 +186,7 @@ public class Maincontrol {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 255), 1, true), "INFORMACI\u00D3N GLOBAL", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(548, 197, 233, 223);
+		panel_2.setBounds(544, 138, 233, 194);
 		frmPanelDeControl.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -233,5 +240,41 @@ public class Maincontrol {
 		label_3.setFont(new Font("Dialog", Font.BOLD, 24));
 		label_3.setBounds(304, 399, 148, 21);
 		frmPanelDeControl.getContentPane().add(label_3);
+		
+		panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Velocidad simulacion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setLayout(null);
+		panel_3.setBounds(538, 345, 239, 75);
+		frmPanelDeControl.getContentPane().add(panel_3);
+		
+		lblMin = new JLabel("max");
+		lblMin.setBounds(10, 22, 27, 15);
+		panel_3.add(lblMin);
+		
+		lblMin_1 = new JLabel("min");
+		lblMin_1.setBounds(202, 22, 27, 15);
+		panel_3.add(lblMin_1);
+		
+		slider_1 = new JSlider();
+		slider_1.setValue(80);
+		slider_1.setMaximum(240);
+		slider_1.setMinimum(10);
+		slider_1.setBounds(35, 21, 167, 16);
+		slider_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				Controlador.changueSimulationSpeed(slider_1.getValue());
+			}
+		});
+		panel_3.add(slider_1);
+		
+		btnPausar = new JButton("Pausar");
+		btnPausar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Controlador.playStopTimer();
+			}
+		});
+		btnPausar.setBounds(65, 41, 89, 23);
+		panel_3.add(btnPausar);
 	}
 }
