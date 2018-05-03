@@ -132,7 +132,7 @@ public class Mapwindow {
 		panel.setLayout(null);
 		
 		JLabel lblMap = new JLabel("map");
-		lblMap.setBounds(0, 0, 519, 333);
+		lblMap.setBounds(0, 0, 529, 333);
 		panel.add(lblMap);
 		lblMap.setIcon(imageIcon);
 	}

@@ -18,6 +18,6 @@ public class CentralSolar extends Central{
 		}
 		System.out.println("prod: " + prod);
 		prod = prod < 0 ? 0 : prod;
-		super.setProduccionActual((float) Math.round(prod * 10) / 10);	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?
+		super.setProduccionActual((float) Math.round(prod * 10.0f) / 10.0f);	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?
 	}
 }

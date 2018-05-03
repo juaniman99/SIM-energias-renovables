@@ -1,5 +1,6 @@
 //Project by Juan Torres G�mez
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class Controlador {
 		ReloadCentralData();
 	}
 	private static void ReloadCentralData() {
-		Maincontrol.slider.setValue(centralSeleccionada.getTrollet());
+		Maincontrol.sliderPower.setValue(centralSeleccionada.getTrollet());
 		Maincontrol.lblNombre.setText("Nombre: " + centralSeleccionada.getNombre());
 		Maincontrol.lblLocalidad.setText("Localizacion:" + "x: " + centralSeleccionada.getPosX() + ", y: " + centralSeleccionada.getPosY());
 		Maincontrol.lblCapacidad.setText("Produccion MAX: " + centralSeleccionada.getProduccionMaxima() + "kw");
@@ -132,11 +133,11 @@ public class Controlador {
 	public static void playStopTimer() {
 		if(Maincontrol.btnPausar.getText().equals("Pausar")) {
 			timer.stop();
-			Maincontrol.slider_1.setEnabled(false);
+			Maincontrol.sliderVelSim.setEnabled(false);
 			Maincontrol.btnPausar.setText("Reanudar");
 		}else {
 			timer.start();
-			Maincontrol.slider_1.setEnabled(true);
+			Maincontrol.sliderVelSim.setEnabled(true);
 			Maincontrol.btnPausar.setText("Pausar");
 		}
 	}
@@ -166,17 +167,32 @@ public class Controlador {
 		}else {
 			dineroToAdd = (modelo.getProduccion()/110); 
 		}
+		
+		if(produccionTotal >= modelo.getConsumoPoblacion()) {	//Si se produce la electricidad solicitada, la reputacion sera positiva.
+			modelo.addReputacion(0.002f);
+			Maincontrol.lblProducci.setForeground(Color.BLACK);
+		}else {
+			modelo.addReputacion(-0.005f);
+			Maincontrol.lblProducci.setForeground(Color.red);
+		}
+		
+		if(modelo.getReputacion() < 0)		//Comprueba la reputación para establecer el color segun convenga.
+			Maincontrol.lblReputacion.setForeground(Color.red);
+		else
+			Maincontrol.lblReputacion.setForeground(new Color(39, 174, 96));
+		
 		modelo.addDinero(dineroToAdd);
-		Maincontrol.label_3.setText(modelo.getDinero() + "�");
+		Maincontrol.lblDinero.setText(modelo.getDinero() + "€");
 		Maincontrol.lblProducci.setText("Produccion: " + produccionTotal + "kw/h");
 		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());
+		Maincontrol.lblReputacion.setText(modelo.getReputacion() + "");
 	}	
 	
 	public static void actualizarCiudadanos() {	//Es llamado cada nuevo día desde TIEMPO.java
 		ArrayList<Ciudadano> ciu = modelo.getCiudadanos();
 		System.out.println("Ac ciu");
 		float toGenerar = 0;
-		int ramdonCiuToAdd = (int)(Math.random()*73)+13;
+		int ramdonCiuToAdd = ((int)(Math.random()*73)+13)+ciu.size()/14;
 		for(int i = 0; i < ramdonCiuToAdd; i++) {	//Inserto personas de forma aleatoria.
 			modelo.addPersona();
 		}

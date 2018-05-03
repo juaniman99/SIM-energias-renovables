@@ -9,11 +9,14 @@ public class Modelo {
 	private ArrayList<Ciudadano> ciudadanos;
 	private float consumoPoblacion;
 	private float produccion;
-	private float dinero = 500;
+	private float dinero;
+	private float reputacion;
 	
 	Modelo(){
 		centrales = new ArrayList<>();
 		ciudadanos = new ArrayList<>();
+		dinero = 500;
+		reputacion = 0;
 		//Crea 3 centrales iniciales
 		addCentral("Eolica", "11 S", 100, (int)(Math.random()*400), (int)(Math.random()*200), 25);
 		addCentral("Eolica", "22 M", 101, (int)(Math.random()*400), (int)(Math.random()*200), 50);
@@ -43,6 +46,11 @@ public class Modelo {
 		return produccion;
 	}
 	public void addCentral(String tipo, String nombre, int id, int posX, int posY, float produccionMaxima) {
+		if(checkPosicionOcupada(posX,posY)) {
+			posX = (int)(Math.random() * 500);
+			posY = (int)(Math.random() * 300);
+		}
+		
 		if(tipo.equals("Eolica"))
 			centrales.add(new CentralEolica(id, nombre, posX, posY, produccionMaxima));
 		else if(tipo.equals("Solar"))
@@ -50,6 +58,14 @@ public class Modelo {
 
 		Maincontrol.model.addRow(new Object[] {id, nombre, tipo, "...", "25%"});
 		centrales.get(centrales.size()-1).powerOnPlant(true);
+	}
+	
+	private boolean checkPosicionOcupada(int x, int y) {	//Comprueba si existe una central en ese espacio.
+		for(int i = 0; i < centrales.size(); i++) {
+			if(centrales.get(i).getPosX() == x && centrales.get(i).getPosY() == y)
+				return true;
+		}
+		return false;
 	}
 	public void removeCentral(int idToRemove) {
 		Maincontrol.model.removeRow(SearchRownById(idToRemove));
@@ -115,10 +131,23 @@ public class Modelo {
 		return (int)(dinero);
 	}
 	
+	//TODO ashdgadaw
 	public void setConsumoPoblacion(float value) {
 		consumoPoblacion = value;
 	}
 	public float getConsumoPoblacion() {
 		return consumoPoblacion;
 	}
+	public float getReputacion() {
+		return (float) (Math.round(reputacion * 100.0) / 100.0);	//Redondea a 2 decimales.
+	}
+	public void addReputacion(float reputacionToAdd) {
+		this.reputacion += reputacionToAdd;
+		
+		if(this.reputacion > 10)		// el máximo de reputacion y minimo sera 10 y -10
+			this.reputacion = 10;
+		if(this.reputacion < -10)
+			this.reputacion = -10;
+	}
+	
 }

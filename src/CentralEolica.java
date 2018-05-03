@@ -22,6 +22,6 @@ public class CentralEolica extends Central{
 		int f = 0;
 		if(super.getPowerStatus())
 			prod = ((tiempo.getViento()/2)+(super.getPosY()/2))/(100/super.getTrollet());
-		super.setProduccionActual((float) Math.round(prod * 10) / 10);	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?	}
+		super.setProduccionActual((float) Math.round(prod * 10.0f) / 10.0f);	//Redondeo a 1 decimal; 	//Esta bien usar una variable protegida?	}
 	}
 }

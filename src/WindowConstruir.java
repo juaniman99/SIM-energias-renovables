@@ -97,9 +97,9 @@ public class WindowConstruir {
 			public void actionPerformed(ActionEvent arg0) {
 				construir.calcularCoste();
 				if(comboBox.getSelectedItem().equals("Eolica"))
-					lblDescripcion.setText("<html><p>Una buena opción. Genera electricidad aprovechando el movimiento del aire. Que giren esas aspas!</p></html>");
+					lblDescripcion.setText("<html><p>Una buena opciï¿½n. Genera electricidad aprovechando el movimiento del aire. Que giren esas aspas!</p></html>");
 				if(comboBox.getSelectedItem().equals("Solar"))
-					lblDescripcion.setText("<html><p>No cabe duda que el sol no sirve solo para broncearse. Quizás no sea la central más productiva, pero aprovecha el sol para producir unos cuantos KW a un buen precio.</p></html>");
+					lblDescripcion.setText("<html><p>No cabe duda que el sol no sirve solo para broncearse. Quizï¿½s no sea la central mï¿½s productiva, pero aprovecha el sol para producir unos cuantos KW a un buen precio.</p></html>");
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Solar", "Eolica"}));
@@ -184,7 +184,7 @@ public class WindowConstruir {
 		lblPosicion.setBounds(224, 31, 72, 17);
 		frmNuevaConstruccion.getContentPane().add(lblPosicion);
 		
-		lblCoste = new JLabel("Coste: 0\u20AC");
+		lblCoste = new JLabel("Coste: â‚¬");
 		lblCoste.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblCoste.setBounds(268, 80, 114, 24);
 		frmNuevaConstruccion.getContentPane().add(lblCoste);

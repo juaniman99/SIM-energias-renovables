@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JSlider;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
@@ -31,10 +32,10 @@ public class Maincontrol {
 	public static JFrame frmPanelDeControl;
 	public static JTable table;
 	public static DefaultTableModel model = new DefaultTableModel();
-	public static JSlider slider;
+	public static JSlider sliderPower;
 	public static JButton btnDetener;
 	public static JButton btnArrancar;
-	public JButton btnNewButton;
+	public JButton btnConstruir;
 	public JButton btnDemoler;
 	public static JLabel lblNombre;
 	public static JLabel lblLocalidad;
@@ -42,14 +43,15 @@ public class Maincontrol {
 	public static JLabel lblEstado;
 	public static JLabel lblProduccion;
 	public static JLabel lblProducci;
-	public static JLabel label_3;
+	public static JLabel lblDinero;
+	public static JLabel lblReputacion;
 	public static JLabel lblEnergiaDemandada;
 	public static JLabel lblPoblacin;
 	public static JLabel lblEficiencia;
 	public JPanel panel_3;
 	public JLabel lblMin;
 	public JLabel lblMin_1;
-	public static JSlider slider_1;
+	public static JSlider sliderVelSim;
 	public static JButton btnPausar;
 	/**
 	 * Launch the application.
@@ -80,13 +82,16 @@ public class Maincontrol {
 	 */
 	private void initialize() {
 		frmPanelDeControl = new JFrame();
+		frmPanelDeControl.getContentPane().setBackground(new Color(51, 51, 51));
 		frmPanelDeControl.setTitle("Panel de control");
+		frmPanelDeControl.setIconImage(Toolkit.getDefaultToolkit().getImage("images/molino_off.png"));
 		frmPanelDeControl.setResizable(false);
 		frmPanelDeControl.setBounds(550, 100, 793, 460);
 		frmPanelDeControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPanelDeControl.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setOpaque(false);
 		scrollPane.setBounds(12, 12, 264, 367);
 		frmPanelDeControl.getContentPane().add(scrollPane);
 		
@@ -111,29 +116,37 @@ public class Maincontrol {
 		scrollPane.setViewportView(table);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setForeground(new Color(204, 204, 204));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Informaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(204, 204, 204)));
 		panel.setToolTipText("Informacion");
 		panel.setBounds(288, 13, 239, 125);
+		panel.setOpaque(false);
+		
 		frmPanelDeControl.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		 lblNombre = new JLabel("Nombre: ");
+		 lblNombre.setForeground(new Color(255, 255, 255));
 		lblNombre.setBounds(12, 23, 215, 15);
 		panel.add(lblNombre);
 		
 		lblCapacidad = new JLabel("Produccion MAX:");
+		lblCapacidad.setForeground(new Color(255, 255, 255));
 		lblCapacidad.setBounds(12, 62, 215, 15);
 		panel.add(lblCapacidad);
 		
 		lblLocalidad = new JLabel("Localizacion:");
+		lblLocalidad.setForeground(new Color(255, 255, 255));
 		lblLocalidad.setBounds(12, 41, 215, 15);
 		panel.add(lblLocalidad);
 		
 		lblEstado = new JLabel("Estado:");
+		lblEstado.setForeground(new Color(255, 255, 255));
 		lblEstado.setBounds(12, 98, 215, 15);
 		panel.add(lblEstado);
 		
 		lblProduccion = new JLabel("Produccion:");
+		lblProduccion.setForeground(new Color(255, 255, 255));
 		lblProduccion.setBounds(12, 78, 215, 15);
 		panel.add(lblProduccion);
 		
@@ -156,6 +169,7 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().add(btnDetener);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(204, 204, 204, 40));
 		panel_1.setBounds(288, 301, 239, 48);
 		frmPanelDeControl.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -173,16 +187,18 @@ public class Maincontrol {
 		label_2.setBounds(97, 33, 75, 15);
 		panel_1.add(label_2);
 		
-		slider = new JSlider();
-		slider.setMinimum(1);
-		slider.addChangeListener(new ChangeListener() {
+		sliderPower = new JSlider();
+		sliderPower.setBackground(new Color(51, 153, 153));
+		sliderPower.setMinimum(1);
+		sliderPower.setOpaque(true);
+		sliderPower.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				Controlador.SetCentralTrotle(slider.getValue());
-				label_2.setText(slider.getValue() + "%");
+				Controlador.SetCentralTrotle(sliderPower.getValue());
+				label_2.setText(sliderPower.getValue() + "%");
 			}
 		});
-		slider.setBounds(25, 12, 167, 16);
-		panel_1.add(slider);
+		sliderPower.setBounds(25, 12, 167, 16);
+		panel_1.add(sliderPower);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 255), 1, true), "INFORMACI\u00D3N GLOBAL", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -191,6 +207,7 @@ public class Maincontrol {
 		panel_2.setLayout(null);
 		
 		lblEficiencia = new JLabel("Eficiencia media:");
+		lblEficiencia.setEnabled(false);
 		lblEficiencia.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblEficiencia.setBounds(12, 171, 196, 15);
 		panel_2.add(lblEficiencia);
@@ -208,14 +225,14 @@ public class Maincontrol {
 		lblEnergiaDemandada.setBounds(12, 89, 209, 15);
 		panel_2.add(lblEnergiaDemandada);
 		
-		btnNewButton = new JButton("Construir");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnConstruir = new JButton("Construir");
+		btnConstruir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Controlador.AnadirPlanta();
 			}
 		});
-		btnNewButton.setBounds(12, 390, 128, 30);
-		frmPanelDeControl.getContentPane().add(btnNewButton);
+		btnConstruir.setBounds(12, 390, 128, 30);
+		frmPanelDeControl.getContentPane().add(btnConstruir);
 		
 		btnDemoler = new JButton("Demoler");
 		btnDemoler.addActionListener(new ActionListener() {
@@ -236,10 +253,10 @@ public class Maincontrol {
 		lblNewLabel.setBounds(294, 384, 75, 15);
 		frmPanelDeControl.getContentPane().add(lblNewLabel);
 		
-		label_3 = new JLabel("1000\u20AC");
-		label_3.setFont(new Font("Dialog", Font.BOLD, 24));
-		label_3.setBounds(304, 399, 148, 21);
-		frmPanelDeControl.getContentPane().add(label_3);
+		lblDinero = new JLabel("1000\u20AC");
+		lblDinero.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblDinero.setBounds(304, 399, 140, 21);
+		frmPanelDeControl.getContentPane().add(lblDinero);
 		
 		panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Velocidad simulacion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -248,25 +265,25 @@ public class Maincontrol {
 		frmPanelDeControl.getContentPane().add(panel_3);
 		
 		lblMin = new JLabel("max");
-		lblMin.setBounds(10, 22, 27, 15);
+		lblMin.setBounds(10, 22, 38, 15);
 		panel_3.add(lblMin);
 		
 		lblMin_1 = new JLabel("min");
 		lblMin_1.setBounds(202, 22, 27, 15);
 		panel_3.add(lblMin_1);
 		
-		slider_1 = new JSlider();
-		slider_1.setValue(80);
-		slider_1.setMaximum(240);
-		slider_1.setMinimum(10);
-		slider_1.setBounds(35, 21, 167, 16);
-		slider_1.addMouseListener(new MouseAdapter() {
+		sliderVelSim = new JSlider();
+		sliderVelSim.setValue(80);
+		sliderVelSim.setMaximum(240);
+		sliderVelSim.setMinimum(10);
+		sliderVelSim.setBounds(41, 21, 161, 16);
+		sliderVelSim.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				Controlador.changueSimulationSpeed(slider_1.getValue());
+				Controlador.changueSimulationSpeed(sliderVelSim.getValue());
 			}
 		});
-		panel_3.add(slider_1);
+		panel_3.add(sliderVelSim);
 		
 		btnPausar = new JButton("Pausar");
 		btnPausar.addActionListener(new ActionListener() {
@@ -276,5 +293,24 @@ public class Maincontrol {
 		});
 		btnPausar.setBounds(65, 41, 89, 23);
 		panel_3.add(btnPausar);
+		
+		JLabel label_rep = new JLabel("REPUTACION");
+		label_rep.setFont(new Font("Dialog", Font.BOLD, 10));
+		label_rep.setBounds(422, 384, 90, 15);
+		frmPanelDeControl.getContentPane().add(label_rep);
+		
+		lblReputacion = new JLabel("0.00");
+		lblReputacion.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblReputacion.setBounds(435, 399, 105, 21);
+		frmPanelDeControl.getContentPane().add(lblReputacion);
+		
+
+		
+		JLabel bgMainControl = new JLabel("");
+		bgMainControl.setBounds(0, 0, 793, 460);
+		ImageIcon bgImage = new ImageIcon(new ImageIcon("images/bg.png").getImage().getScaledInstance(793, 460, Image.SCALE_DEFAULT));
+		bgMainControl.setIcon(bgImage);
+		frmPanelDeControl.getContentPane().add(bgMainControl);
+	
 	}
 }
