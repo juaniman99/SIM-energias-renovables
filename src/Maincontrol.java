@@ -26,6 +26,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Maincontrol {
 
@@ -101,6 +102,7 @@ public class Maincontrol {
         model.addColumn("Produccion");
         model.addColumn("potencia");	//Porcentaje potencia.
 		table = new JTable(model);
+		
 		table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -184,7 +186,10 @@ public class Maincontrol {
 		panel_1.add(label_1);
 		
 		JLabel label_2 = new JLabel("50%");
-		label_2.setBounds(97, 33, 75, 15);
+		label_2.setBackground(Color.WHITE);
+		label_2.setOpaque(true);
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setBounds(84, 33, 56, 15);
 		panel_1.add(label_2);
 		
 		sliderPower = new JSlider();
