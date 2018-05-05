@@ -27,29 +27,61 @@ public class Controlador {
 		climaw = new Climawindow();
 		modelo = new Modelo();
 		contrucw = new WindowConstruir();
-		climaw.frmClima.setVisible(true);
-		//loginw.frame.setVisible(true);
-		mapw.frmMapa.setVisible(true);
+		loginw.frame.setVisible(true);
 		actualizarCiudadanos();
 		simulationSpeed = 80;
-	    timer.start();
 	}
 	
 	public static void Login(String user, String pass) {
 		if(modelo.checkCredentials(user, pass)) {
 			//Credenciales correctas.
 			loginw.frame.setVisible(false);
+			mapw.frmMapa.setVisible(true);
+			climaw.frmClima.setVisible(true);
+			//mainc.frmPanelDeControl.setVisible(true);
+		    timer.start();
 		}else {
 			//Credenciales incorrectas.
 			JOptionPane.showMessageDialog(null,"Credenciales incorrectas.");
 		}
 	}
-	public static void AnadirPlanta() {
-		//Inicia el asistente para seleccionar el tipo de planta y su posiciï¿½n.
+	
+	static Timer timer = new Timer (80, new ActionListener () {	//El corazón de todo el programa. El que le da vida.
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			NextStep();
+		}
+	});
+	
+	private static void NextStep() {	//Principalmente este método será llamado desde el Timer de controlador, pero al ponerlo aquí me permitirirá en un futuro añadir más funciones.
+		tiempo.Step();
+		CalcularDatos();
+	}
+	public static void changueSimulationSpeed(int value) {	//Modifica el tiempo que el timer esperará al terminar cada ciclo.
+		simulationSpeed = value;
+		timer.stop();
+        timer.setDelay( simulationSpeed );
+        timer.start();
+		System.out.println(simulationSpeed);
+	}	
+	public static void playStopTimer() {	//Pausa y renauda el juego
+		if(Maincontrol.btnPausar.getText().equals("Pausar")) {
+			timer.stop();
+			Maincontrol.sliderVelSim.setEnabled(false);
+			Maincontrol.btnPausar.setText("Reanudar");
+		}else {
+			timer.start();
+			Maincontrol.sliderVelSim.setEnabled(true);
+			Maincontrol.btnPausar.setText("Pausar");
+		}
+	}
+	
+	public static void AnadirPlanta() {	//Llamado desde el botón "Construir" del MainPanel
+		//Inicia el asistente para seleccionar el tipo de planta y su posición.
 		contrucw.frmNuevaConstruccion.setVisible(true);
 	}
 	
-	public static void ConstruirPlanta(String tipo, String nombre, int posX, int posY, String produccionMaxima, int coste) {
+	public static void ConstruirPlanta(String tipo, String nombre, int posX, int posY, String produccionMaxima, int coste) {	//Llamado desde el botón construir de WindowConstruir
 		int prodMax = 0;
 		if(produccionMaxima.equals("XS"))
 			prodMax = 10;
@@ -75,11 +107,12 @@ public class Controlador {
 		modelo.removeCentral((int) Maincontrol.table.getValueAt(Maincontrol.table.getSelectedRow(), 0));
 	}
 	
-	public static void TableSelectionChangued(int v) {	//Este metodo serï¿½ llamado desde la tabla de MainCOntrol cada vez que se seleccione una fila.
+	public static void TableSelectionChangued(int v) {	//Este metodo será llamado desde la tabla de MainCOntrol cada vez que se seleccione una fila.
 		centralSeleccionada = modelo.getCentral(v);
 		ReloadCentralData();
 	}
-	private static void ReloadCentralData() {
+	
+	private static void ReloadCentralData() {	//Llamado la mayoría de veces al hacer click sobre una celda de la tabla de centrales.
 		Maincontrol.sliderPower.setValue(centralSeleccionada.getTrollet());
 		Maincontrol.lblNombre.setText("Nombre: " + centralSeleccionada.getNombre());
 		Maincontrol.lblLocalidad.setText("Localizacion:" + "x: " + centralSeleccionada.getPosX() + ", y: " + centralSeleccionada.getPosY());
@@ -99,48 +132,21 @@ public class Controlador {
 			Maincontrol.btnDetener.setEnabled(false);
 		}
 	}
+	
 	public static void SetCentralTrotle(int value) {
 		centralSeleccionada.setTrollet(value);
 	}
+	
 	public static void apagarOEncenderCentral(boolean val) {	//Si es true, la enciende. False la apaga.
 		centralSeleccionada.powerOnPlant(val);
 		ReloadCentralData();
 	}
-	public static void SelectRow(int i) {
+	
+	public static void SelectRow(int i) {	//Selecciona una fila de la tabla. Este metodo permite seleccionar las centrales desde el mapa.
 		Maincontrol.table.setRowSelectionInterval(i, i);
 	}
-	//El timer volver a ponerlo a 80.
-	static Timer timer = new Timer (80, new ActionListener () {	//El corazï¿½n de todo el programa. El que le da vida.
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO ESTA ES LA FUNCIï¿½N QUE SE EJECUTA
-			NextStep();
-		}
-				
-	});
 	
-	private static void NextStep() {	//Principalmente este mï¿½todo serï¿½ llamado desde el Timer de controlador, pero al ponerlo aquï¿½ me permitirï¿½ en un futuro aï¿½adir mï¿½s funciones.
-		tiempo.Step();
-		CalcularDatos();
-	}
-	public static void changueSimulationSpeed(int value) {
-		simulationSpeed = value;
-		timer.stop();
-        timer.setDelay( simulationSpeed );
-        timer.start();
-		System.out.println(simulationSpeed);
-	}
-	public static void playStopTimer() {
-		if(Maincontrol.btnPausar.getText().equals("Pausar")) {
-			timer.stop();
-			Maincontrol.sliderVelSim.setEnabled(false);
-			Maincontrol.btnPausar.setText("Reanudar");
-		}else {
-			timer.start();
-			Maincontrol.sliderVelSim.setEnabled(true);
-			Maincontrol.btnPausar.setText("Pausar");
-		}
-	}
+	
 	public static void CalcularDatos() {
 		ArrayList<Central> centrales = modelo.getCentrales();	//Obtiene las centrales.
 		float produccionTotal = 0;
@@ -188,7 +194,7 @@ public class Controlador {
 		Maincontrol.lblReputacion.setText(modelo.getReputacion() + "");
 	}	
 	
-	public static void actualizarCiudadanos() {	//Es llamado cada nuevo dÃ­a desde TIEMPO.java
+	public static void actualizarCiudadanos() {	//Es llamado cada nuevo día desde TIEMPO.java
 		ArrayList<Ciudadano> ciu = modelo.getCiudadanos();
 		System.out.println("Ac ciu");
 		float toGenerar = 0;

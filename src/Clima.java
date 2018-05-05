@@ -4,8 +4,8 @@ import javax.swing.ImageIcon;
 
 //Project By Juan Torres Gï¿½mez
 
-//	Esta clase la usarï¿½ Tiempo.java . Almacena los datos de los distintos climas posibles.
-//	PD: Cada clima deberï¿½a detener la volatilidad de cada tipo (el rango de variacion de la temperatura media por ejemplo). Para no complicarme demasiado, este dato serï¿½ fijo en Tiempo.CambiarClima();
+//	Esta clase la usa Tiempo.java . Almacena los datos de los distintos climas posibles.
+//	PD: Cada clima debería detener la volatilidad de cada tipo (el rango de variacion de la temperatura media por ejemplo). Para no complicarme demasiado, este dato sería fijo en Tiempo.CambiarClima();
 public class Clima {
 	private String nombre;
 	private String img;

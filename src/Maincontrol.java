@@ -102,7 +102,11 @@ public class Maincontrol {
         model.addColumn("Produccion");
         model.addColumn("potencia");	//Porcentaje potencia.
 		table = new JTable(model);
-		
+
+
+		table.setDefaultEditor(Object.class, null);
+
+
 		table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {

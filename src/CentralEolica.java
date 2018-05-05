@@ -12,10 +12,10 @@ public class CentralEolica extends Central{
 
 		//anadir();		
 	}
-	@Override
+	/*@Override
 	public void anadir() {
 		super.anadir();
-	}
+	}*/
 	
 	public void Steep(Tiempo tiempo) {	//Calculará la producción en base al clima.
 		float prod = 0;

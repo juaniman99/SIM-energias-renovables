@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class Construir {
 	private int coste;
-	private WindowConstruir wc;	//Prevengo poner los objetos y clases estáticas.
+	private WindowConstruir wc;	//Prevengo poner los objetos y clases estáticas al traer los componentes.
 	private boolean loaded;
 	
 	Construir(WindowConstruir wc){

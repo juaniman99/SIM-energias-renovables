@@ -9,12 +9,13 @@ public class CentralSolar extends Central{
 		super(id, nombre, posX, posY, produccionMaxima, new ImageIcon(new ImageIcon("images/panel_on.gif").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT)), new ImageIcon(new ImageIcon("images/panel_off.png").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT)));
 		// TODO Auto-generated constructor stub
 	}
+	
 	public void Steep(Tiempo tiempo) {	//Calculará la producción en base al clima.
 		float prod = 0;
 		int f = 0;
 		if(tiempo.getSol() > 3) {
 			prod = (float)((tiempo.getSol()/3))/(100/super.getTrollet());
-			prod += (super.getPosY()/300)*7;
+			if(prod > 0) prod += (super.getPosY()/300)*7;	//Simplemente apoya la producci�n multiplicando un poco los valores.
 		}
 		System.out.println("prod: " + prod);
 		prod = prod < 0 ? 0 : prod;

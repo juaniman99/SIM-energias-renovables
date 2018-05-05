@@ -17,7 +17,7 @@ public class Tiempo {
 	private int solARestar;	//Al establecer el clima, se establece una "nubosidad". Este es ese factor.
 	private float temperatura;
 	
-	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiarï¿½. La variable se reestablecerï¿½ a un valor aleatorio.
+	private int ticksToNextEvent;	//Cuando llegue a 0, el clima cambiará. La variable se reestablecerá a un valor aleatorio.
 	private int TicksToNextDates;	//NO CONFUNDIR. cada vez que llegue a 0, se calcularï¿½ unos datos al azar basado en el clima actual.
 	
 	public Tiempo() {

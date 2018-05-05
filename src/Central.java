@@ -35,7 +35,7 @@ public class Central {
 		powerStatus = false;
 		anadir();
 	}
-	public void anadir() {
+	public void anadir() {	//Añade la central al mapa y le agrega propiedades.
 		lblpanel8 = new JLabel();
 		lblpanel8.setBounds(posX, posY, 70, 70);
 		Mapwindow.panel_1.add(lblpanel8);
@@ -56,7 +56,7 @@ public class Central {
 		});
 	}
 	
-	public void powerOnPlant(boolean b) {	//Si es true, se encende. si no, se apaga.
+	public void powerOnPlant(boolean b) {	//Si es true, se enciende. si no, se apaga.
 		powerStatus = b ? true : false;
 		
 		if(powerStatus) {

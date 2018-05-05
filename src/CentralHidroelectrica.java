@@ -9,4 +9,5 @@ public class CentralHidroelectrica extends Central{
 		// TODO Auto-generated constructor stub
 	}
 	
+	//TODO POR HACER ESTA CENTRAL (necesario terminar el clima de lluvias.)
 }
