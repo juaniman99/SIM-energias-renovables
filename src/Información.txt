@@ -1,0 +1,24 @@
+Pequeño simulador/videojuego en el que hay que controlar las centrales electricas
+para abastecer el consumo de la población, que día a día va creciendo.
+
+Para ello, es posible construir nuevas centrales con el dinero conseguido con la venta
+de electricidad o regular la producción de cada una de ellas, pues una sobreproducción
+derivará en costes.
+
+Las producción de las distintas centrales estarán ligadas al tiempo metereológico de
+ese momento.
+
+
+Las credenciales (todas hacen lo mismo) de acceso puede ser:
+  root, root
+  juan, 1234
+  nodex, 4321
+
+------------- El MAIN del programa es Maincontrol.java ----------------
+
+
+Este ejercicio incluye:
+	> Altas (al crear las centrales).
+	> Bajas (al demolerlas).
+	> Modificaciones (modificando los parametros de las centrales)
+	> Herencias

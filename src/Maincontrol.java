@@ -54,6 +54,7 @@ public class Maincontrol {
 	public JLabel lblMin_1;
 	public static JSlider sliderVelSim;
 	public static JButton btnPausar;
+	public JPanel panel_4;
 	/**
 	 * Launch the application.
 	 */
@@ -102,20 +103,16 @@ public class Maincontrol {
         model.addColumn("Produccion");
         model.addColumn("potencia");	//Porcentaje potencia.
 		table = new JTable(model);
-
-
 		table.setDefaultEditor(Object.class, null);
 
-
 		table.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
+			public void keyReleased(KeyEvent e) {
 				Controlador.TableSelectionChangued(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
 			}
 		});
 		table.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseReleased(MouseEvent arg0) {
 				Controlador.TableSelectionChangued(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
 			}
 		});
@@ -320,6 +317,12 @@ public class Maincontrol {
 		ImageIcon bgImage = new ImageIcon(new ImageIcon("images/bg.png").getImage().getScaledInstance(793, 460, Image.SCALE_DEFAULT));
 		bgMainControl.setIcon(bgImage);
 		frmPanelDeControl.getContentPane().add(bgMainControl);
+		
+		panel_4 = new JPanel();
+		panel_4.setBackground(new Color( 33, 47, 60 , 200));
+		panel_4.setBounds(0, 0, 787, 431);
+		//panel_4.
+		frmPanelDeControl.getContentPane().add(panel_4);
 	
 	}
 }

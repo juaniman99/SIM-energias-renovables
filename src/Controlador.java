@@ -1,4 +1,4 @@
-//Project by Juan Torres Gï¿½mez
+//Project by Juan Torres Gomez
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -38,7 +38,6 @@ public class Controlador {
 			loginw.frame.setVisible(false);
 			mapw.frmMapa.setVisible(true);
 			climaw.frmClima.setVisible(true);
-			//mainc.frmPanelDeControl.setVisible(true);
 		    timer.start();
 		}else {
 			//Credenciales incorrectas.
@@ -144,6 +143,7 @@ public class Controlador {
 	
 	public static void SelectRow(int i) {	//Selecciona una fila de la tabla. Este metodo permite seleccionar las centrales desde el mapa.
 		Maincontrol.table.setRowSelectionInterval(i, i);
+		TableSelectionChangued(Integer.parseInt(Maincontrol.table.getValueAt(Maincontrol.table.getSelectedRow(), 0).toString()));
 	}
 	
 	
@@ -167,11 +167,11 @@ public class Controlador {
 		modelo.setProduccion(produccionTotal);
 		if(centralSeleccionada != null)
 			Maincontrol.lblProduccion.setText("Produccion: " + centralSeleccionada.getProduccionActual() + "kw");
-		float dineroToAdd;
-		if(modelo.getProduccion() >= modelo.getConsumoPoblacion()) {	//Solo se va a vender la electricidad solicitada, y la sobrante no. Sin embargo, si no se genera la suficiente para todo el mundo, se venderÃ¡ toda la disponible.
-			dineroToAdd = (modelo.getConsumoPoblacion()/110);	// Esta es la sencilla formula que simularÃ¡ el precio del kw
-		}else {
-			dineroToAdd = (modelo.getProduccion()/110); 
+		float dineroToAdd = 0;
+		dineroToAdd = (modelo.getConsumoPoblacion()/110);	// Esta es la sencilla formula que simularÃ¡ el precio del kw
+		
+		if(modelo.getProduccion() + 50 > modelo.getConsumoPoblacion()) {	//Si se genera corriente de mas, derivará en costes de producción.
+			modelo.removeDinero((int)(modelo.getProduccion()/180));						
 		}
 		
 		if(produccionTotal >= modelo.getConsumoPoblacion()) {	//Si se produce la electricidad solicitada, la reputacion sera positiva.
@@ -193,6 +193,7 @@ public class Controlador {
 		Maincontrol.lblPoblacin.setText("Poblacion: " + modelo.getNumCiud());
 		Maincontrol.lblReputacion.setText(modelo.getReputacion() + "");
 	}	
+	
 	
 	public static void actualizarCiudadanos() {	//Es llamado cada nuevo día desde TIEMPO.java
 		ArrayList<Ciudadano> ciu = modelo.getCiudadanos();
